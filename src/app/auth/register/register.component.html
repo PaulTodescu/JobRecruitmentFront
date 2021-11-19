@@ -1,0 +1,62 @@
+<form name="registerForm" [formGroup]="registerForm">
+    
+    <!--First Name-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>First Name <span style="color: red;">*</span></mat-label>
+            <input formControlName="firstName" matInput type="text" />
+        </mat-form-field>
+    </div>
+
+    <!--Last Name-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Last Name <span style="color: red;">*</span></mat-label>
+            <input formControlName="lastName" matInput type="text" />
+        </mat-form-field>
+    </div>
+
+    <!--Email-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email <span style="color: red;">*</span></mat-label>
+            <input formControlName="email" matInput type="text" />
+        </mat-form-field>
+    </div>
+    
+    <!--Password-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password <span style="color: red;">*</span></mat-label>
+            <input formControlName="password" matInput [type]=" hidePassword ? 'password' : 'text'" />
+            <button  mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>
+                {{hidePassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </button>
+    </mat-form-field>
+    </div>
+
+    <!--Confirm Password-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Confirm Password <span style="color: red;">*</span></mat-label>
+            <input formControlName="password" matInput type='password' />
+    </mat-form-field>
+    </div>
+
+    <!--Role-->
+    <div>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>What do you want? <span style="color: red;">*</span></mat-label>
+            <mat-select  formControlName="role">
+                <mat-option value="EMPLOYEE">I am looking for jobs</mat-option>
+                <mat-option value="RECRUITER">I want to hire people</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+    
+    <div class="center-button">
+        <button (click)="register(registerForm)" mat-raised-button color="primary">Register</button>
+    </div>
+  </form>

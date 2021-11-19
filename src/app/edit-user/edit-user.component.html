@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="center">
+    <div class="row align-items-center h-100">
+        <div class="col-md-5 col-sm-10 mx-auto">
+          <div id="tab" class="card justify-content-center">
+              <div class="card-body">
+                <p class="section-title">Edit Your Profile</p>
+                <form name="editUserForm" [formGroup]="editUserForm">
+
+                    <!--First Name-->
+                    <div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input formControlName="firstName" matInput type="text" />
+                        </mat-form-field>
+                    </div>
+
+                    <!--Last Name-->
+                    <div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input formControlName="lastName" matInput type="text" />
+                        </mat-form-field>
+                    </div>
+                    
+                    <!--Email-->
+                    <div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="email" matInput type="text" />
+                        </mat-form-field>
+                    </div>
+                    <!--Role-->
+                    <div>
+                        <mat-form-field class="full-width" appearance="outline">
+                          <mat-label>What do you want?</mat-label>
+                            <mat-select formControlName="role">
+                                <mat-option value="EMPLOYEE">I am looking for jobs</mat-option>
+                                <mat-option value="RECRUITER">I want to hire people</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!--Submit Button-->
+                    <div class="center-button">
+                        <button (click)="editUser(editUserForm)" mat-raised-button color="primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

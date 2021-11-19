@@ -1,0 +1,9 @@
+<app-navbar></app-navbar>
+<!-- <h1 style="text-align: center; margin-top: 100px;">Received {{nr_jobs}} jobs</h1> -->
+<div *ngFor="let job of jobs">
+    <h1>{{job?.id}}</h1>
+    <h1>{{job?.title}}</h1>
+    <h1>{{job?.createdAt}}</h1>
+    <h1>{{job?.companyName}}</h1>
+    <h1>{{job?.location}}</h1>
+</div>

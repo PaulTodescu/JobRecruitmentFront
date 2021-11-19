@@ -1,0 +1,32 @@
+<div class="separator"></div>
+<header>
+    <div class="content">
+    <img src="assets/img/logo.png" alt="logo" class ="logo-png">
+    <a href="home" class="logo-title-png" mat-button>HireNeed</a>
+    <li class="nav-item" >
+        <a class="nav-link active" mat-button (click)="goToAddJob()">Add Job</a>
+    </li>
+    <li class="nav-item" >
+        <a class="nav-link active" mat-button>Your Jobs</a>
+    </li>
+    <li class="nav-item" >
+        <a class="nav-link active" mat-button>Your Applications</a>
+    </li> 
+    <nav class="nav-right">
+        <ul>
+            <li class="nav-item" >
+                <a class="nav-link active" [matMenuTriggerFor]="appMenu" mat-button>{{username}}   
+                    <mat-icon inline=true>arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #appMenu="matMenu">
+                    <ng-template matMenuContent let-name="logout">
+                      <button mat-menu-item (click)="goToEditProfile()">Profile</button>
+                      <button mat-menu-item (click)="logout()">Log out</button>
+                    </ng-template>
+                  </mat-menu>
+            </li>     
+        </ul>
+    </nav>
+</div>
+</header>
+<div class="separator"></div>
