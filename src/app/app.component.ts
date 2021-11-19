@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { flush } from '@angular/core/testing';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'JobRecruitmentFront';
+
+  title = 'Job Recruitment';
+
+  constructor(
+    private titleService: Title,
+    private router: Router){ }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
+
+  ngOnInit(): void {
+    this.setTitle('HireNeed');
+  }
 }
