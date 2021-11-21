@@ -14,9 +14,7 @@ export class HomeComponent implements OnInit {
   bannerImage:string = 'assets/img/banner.png';
 
   nr_categories: number | undefined;
-  nr_rows: number | undefined;
   categories: CategoryDTO[] | undefined;
-  current_category: CategoryDTO | undefined;
 
   constructor(
     private categoryService: CategoryService,
@@ -27,11 +25,6 @@ export class HomeComponent implements OnInit {
       (response: CategoryDTO[]) => {
         this.categories = response;
         this.nr_categories = response.length;
-        if (this.nr_categories % 6 == 0){
-          this.nr_rows = Math.round(this.nr_categories / 6);
-        } else {
-          this.nr_rows = Math.round(this.nr_categories / 6 + 1);
-        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -39,14 +32,10 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  public getNumberRows(): Array<number>{
-    return new Array(this.nr_rows);
-  }
-
   public getCategoriesRow(index: number): CategoryDTO[]{
     if (this.categories != undefined){
-      var startIndex = index * 6;
-      var endIndex = startIndex + 6;
+      let startIndex = index * 6;
+      let endIndex = startIndex + 6;
       return this.categories.slice(startIndex, endIndex)
     } else {
       return new Array(0);
@@ -54,7 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   public goToJobsPage(categoryId: number | undefined): void{
-    if (categoryId != undefined){    
+    if (categoryId != undefined){
       this.router.navigate(['/jobs'], {
         queryParams: {'categoryId': categoryId}
       });
@@ -63,7 +52,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories()
-    
+
   }
 
 }

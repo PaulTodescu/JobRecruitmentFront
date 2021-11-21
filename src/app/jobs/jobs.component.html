@@ -1,9 +1,85 @@
 <app-navbar></app-navbar>
-<!-- <h1 style="text-align: center; margin-top: 100px;">Received {{nr_jobs}} jobs</h1> -->
-<div *ngFor="let job of jobs">
-    <h1>{{job?.id}}</h1>
-    <h1>{{job?.title}}</h1>
-    <h1>{{job?.createdAt}}</h1>
-    <h1>{{job?.companyName}}</h1>
-    <h1>{{job?.location}}</h1>
+<div class="title-section">
+  <h1>Jobs in {{categoryName}}</h1>
+  <div *ngIf="nr_jobs === 1; then singleJob else multipleJobs"></div>
+  <ng-template #singleJob><p>showing {{nr_jobs}} result</p></ng-template>
+  <ng-template #multipleJobs><p>showing {{nr_jobs}} results</p></ng-template>
 </div>
+<div class="jobs-container">
+<div *ngIf="nr_jobs !== 0; then showJobs else showNoJobsMessage"></div>
+<ng-template #showJobs>
+    <div *ngFor="let job of jobs" style="display: inline-block">
+          <div style="width: 21rem;">
+            <div class="card text-center" style="margin: 40px">
+            <div class="card text-center">
+            <div class="card-header" style="background-color: #034953; color: white">
+              <h1 class="job-title">{{job?.title}}</h1>
+            </div>
+            <div class="card-body">
+              <h3 style="margin-bottom: 20px"> Offered by: {{job?.companyName}} </h3>
+              <div class="separator"></div>
+              <h4 style="margin-top: 20px; margin-bottom: 20px"> Location: {{job?.location}} </h4>
+              <div class="separator"></div>
+              <h4 style="margin-top: 20px; margin-bottom: 20px"> {{job?.createdAt}} </h4>
+              <button mat-raised-button color="primary" style="background-color: #034953">Details</button>
+            </div>
+            <div class="card-footer text-muted">
+              <div *ngIf="getNumberDaysAgo(job.createdAt) === 0; then showToday else showDaysAgo"></div>
+              <ng-template #showToday>
+                today
+              </ng-template>
+              <ng-template #showDaysAgo>
+                {{getNumberDaysAgo(job.createdAt)}} days ago
+              </ng-template>
+            </div>
+          </div>
+      </div>
+          </div>
+    </div>
+</ng-template>
+<ng-template #showNoJobsMessage>
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO JOBS FOUND!</h4>
+  </div>
+</ng-template>
+</div>
+
+
+<!--<div *ngIf="nr_jobs !== 0; then showJobs else showNoJobsMessage"></div>-->
+<!--<ng-template #showJobs>-->
+<!--  <div class="jobs-container">-->
+<!--    <table class="table">-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let row of getNumberRows(); let rowindex = index">-->
+<!--        <td *ngFor="let job of getJobsRow(rowindex)">-->
+<!--          <div style="width: 21rem;">-->
+<!--            <div class="card text-center" style="margin: 40px">-->
+<!--              <div class="card-header" style="background-color: #034953; color: white">-->
+<!--                <h1 class="job-title"> {{job.title}} </h1>-->
+<!--              </div>-->
+<!--              <div class="card-body">-->
+<!--                <h3 style="margin-bottom: 20px"> Offered by: {{job.companyName}} </h3>-->
+<!--                <div class="separator"></div>-->
+<!--                <h4 style="margin-top: 20px; margin-bottom: 20px"> Location: {{job.location}} </h4>-->
+<!--                <div class="separator"></div>-->
+<!--                <h4 style="margin-top: 20px; margin-bottom: 20px"> {{job.createdAt}} </h4>-->
+<!--                <button mat-raised-button color="primary" style="background-color: #034953">Details</button>-->
+<!--              </div>-->
+<!--              <div class="card-footer text-muted">-->
+<!--                <div *ngIf="getNumberDaysAgo(job.createdAt) === 0; then showToday else showDaysAgo"></div>-->
+<!--                <ng-template #showToday>-->
+<!--                  today-->
+<!--                </ng-template>-->
+<!--                <ng-template #showDaysAgo>-->
+<!--                  {{getNumberDaysAgo(job.createdAt)}} days ago-->
+<!--                </ng-template>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</ng-template>-->
+

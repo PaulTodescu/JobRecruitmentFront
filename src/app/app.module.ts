@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JobsComponent } from './jobs/jobs.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { RecruiterJobsComponent } from './recruiter-jobs/recruiter-jobs.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     JobsComponent,
     AddJobComponent,
     EditUserComponent,
+    RecruiterJobsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Injector, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, Injector, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
-import { Category } from '../entities/category';
-import { CategoryDTO } from '../entities/categoryDTO';
-import { Job } from '../entities/job';
-import { CategoryService } from '../services/category/category.service';
-import { JobService } from '../services/job/job.service';
+import {CategoryDTO} from '../entities/categoryDTO';
+import {CategoryService} from '../services/category/category.service';
+import {JobService} from '../services/job/job.service';
 
 @Component({
   selector: 'app-add-job',
@@ -65,7 +63,7 @@ export class AddJobComponent implements OnInit {
       salary: salary,
       salaryCurrency: salaryCurrency,
       salaryType: salaryType,
-      createdAt: this.getCurrentDate(),
+      createdAt: new Date(),
       companyName: companyName,
       location: location,
       category:categoryId
@@ -88,17 +86,16 @@ export class AddJobComponent implements OnInit {
     );
   }
 
-  public getCurrentDate(): string{
-    var current_date = new Date();
-    var day = current_date.getDate();
-    var month = current_date.getMonth()+1; 
-    var year = current_date.getFullYear();
-    var formatted_current_date = month+'/'+day+'/'+year;
-    return formatted_current_date;
-  }
+  // public getCurrentDate(): string{
+  //   let current_date = new Date();
+  //   // let day = current_date.getDate();
+  //   // let month = current_date.getMonth()+1;
+  //   // let year = current_date.getFullYear();
+  //   // return month + '/' + day + '/' + year;
+  // }
 
   public onSuccess(): void {
-    var router: Router = this.injector.get(Router);
+    let router: Router = this.injector.get(Router);
     Swal.fire({
       position: 'center',
       icon: 'success',
