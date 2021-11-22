@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthenticationComponent } from 'src/app/auth/authentication/authentication.component';
+import { Observable } from 'rxjs';
 import { AuthenticationRequest } from 'src/app/entities/authenticationRequest';
 import { AuthenticationResponse } from 'src/app/entities/AuthenticationResponse';
 import { User } from 'src/app/entities/user';
+import {Job} from "../../entities/job";
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +24,17 @@ export class UserService {
   }
 
   public getUsername(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/user/info`, { responseType: 'text' as 'json'});
+    return this.http.get<any>(`${this.apiUrl}/user/name`, { responseType: 'text' as 'json'});
   }
 
   public getUsernameByEmail(email: string){
     return this.http.get<any>(`${this.apiUrl}/user?email=${email}`, { responseType: 'text' as 'json'});
   }
+
+  public getJobsForCurrentUser(): Observable<Job[]> {
+    return this.http.get<Job[]>(`${this.apiUrl}/user/jobs`);
+  }
+
+  // public getLoggedInUser()
 
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../services/user/user.service";
+import {Job} from "../entities/job";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recruiter-jobs',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecruiterJobsComponent implements OnInit {
 
-  constructor() { }
+  jobs: Job[] | undefined;
+  nr_jobs = 0;
+
+  constructor(
+    private userService: UserService,
+    private router: Router) { }
+
+  public getJobsForCurrentUser(): void{
+    this.userService.getJobsForCurrentUser().subscribe(
+      (response: Job[]) => {
+        this.jobs = response;
+        this.nr_jobs = response.length;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public goToAddJob(): void{
+    this.router.navigateByUrl('job/add');
+  }
 
   ngOnInit(): void {
+    this.getJobsForCurrentUser();
   }
 
 }

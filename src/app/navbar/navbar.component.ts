@@ -31,6 +31,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('job/add');
   }
 
+  public goToHome(): void{
+    this.router.navigateByUrl('home');
+  }
+
+  public goToMyJobs(): void{
+    this.router.navigateByUrl('myjobs');
+  }
+
   public goToEditProfile(): void{
     this.router.navigateByUrl('user/edit');
   }

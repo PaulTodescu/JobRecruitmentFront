@@ -1,1 +1,40 @@
-<p>recruiter-jobs works!</p>
+<app-navbar></app-navbar>
+<div class="title-section">
+  <h1>Jobs You Added</h1>
+  <div *ngIf="nr_jobs === 1; then singleJob else multipleJobs"></div>
+  <ng-template #singleJob><p>showing {{nr_jobs}} result</p></ng-template>
+  <ng-template #multipleJobs><p>showing {{nr_jobs}} results</p></ng-template>
+</div>
+<div class="jobs-container">
+    <button type="button" class="btn btn-dark" (click)="goToAddJob()"> New <mat-icon style="vertical-align: bottom !important;">add</mat-icon> </button>
+    <div class="job-row" style="color: white !important; background-color: #034953">
+      <div style="width: 70%;">
+        <h3>Title</h3>
+        <h3>Company</h3>
+        <h3>Date</h3>
+      </div>
+      <div style="width: 30%;">
+        <h3>Actions</h3>
+      </div>
+    </div>
+  <div *ngIf="nr_jobs !== 0; then showJobs else showNoJobsMessage"></div>
+  <ng-template #showJobs>
+    <div *ngFor="let job of jobs" class="job-row">
+      <div style="width: 70%;">
+        <h3>{{job?.title}}</h3>
+        <h3>{{job?.companyName}}</h3>
+        <h3>{{job?.createdAt}}</h3>
+      </div>
+      <div style="width: 30%;">
+        <button type="button" class="btn btn-secondary" > Details <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon> </button>
+        <button type="button" class="btn btn-primary"> Edit <mat-icon style="vertical-align: bottom !important;">edit</mat-icon> </button>
+        <button type="button" class="btn btn-danger"> Delete <mat-icon style="vertical-align: bottom !important;">delete</mat-icon> </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #showNoJobsMessage>
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO JOBS FOUND!</h4>
+    </div>
+  </ng-template>
+</div>
