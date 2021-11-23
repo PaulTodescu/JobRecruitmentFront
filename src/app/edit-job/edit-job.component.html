@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="center">
+  <div class="row align-items-center h-100">
+    <div class="col-md-5 col-sm-10 mx-auto">
+      <div id="tab" class="card justify-content-center">
+        <div class="card-body">
+          <p class="section-title">Edit Job</p>
+          <form name="editJobForm" [formGroup]="editJobForm">
+
+            <!--Title-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label style="color: black">Title <span style="color: red;">*</span></mat-label>
+                <input formControlName="title" matInput type="text"/>
+              </mat-form-field>
+            </div>
+
+            <!--Description-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Description <span style="color: red;">*</span></mat-label>
+                <input formControlName="description" matInput type="text" />
+              </mat-form-field>
+            </div>
+
+            <!--Salary-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline" (input)="checkIfSalaryIsDefined()">
+                <mat-label>Salary</mat-label>
+                <input formControlName="salary" matInput type="text" />
+              </mat-form-field>
+            </div>
+
+            <!--SalaryCurrency-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Currency</mat-label>
+                <mat-select  formControlName="salaryCurrency">
+                  <mat-option value="RON">RON</mat-option>
+                  <mat-option value="EUR">EUR</mat-option>
+                  <mat-option value="USD">USD</mat-option>
+                  <mat-option value="GBD">GBD</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!--SalaryType-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Payment</mat-label>
+                <mat-select  formControlName="salaryType">
+                  <mat-option value="ONETIME">One Time</mat-option>
+                  <mat-option value="HOURLY">Hourly</mat-option>
+                  <mat-option value="DAILY">Daily</mat-option>
+                  <mat-option value="WEEKLY">Weekly</mat-option>
+                  <mat-option value="MONTHLY">Monthly</mat-option>
+                  <mat-option value="ANNUAL">Annual</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!--Company Name-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Who is offering? <span style="color: red;">*</span></mat-label>
+                <input formControlName="companyName" matInput type="text" />
+              </mat-form-field>
+            </div>
+
+            <!--Location-->
+            <div>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Location <span style="color: red;">*</span></mat-label>
+                <input formControlName="location" matInput type="text" />
+              </mat-form-field>
+            </div>
+
+            <!--Category-->
+<!--            <div>-->
+<!--              <mat-form-field class="full-width" appearance="outline">-->
+<!--                <mat-label>Category <span style="color: red;">*</span></mat-label>-->
+<!--                <mat-select  formControlName="category">-->
+<!--                  <mat-option *ngFor="let category of categories" value="{{ category?.id }}">-->
+<!--                    {{ category?.name }}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+
+            <!--Submit Button-->
+            <div class="center-button">
+              <button (click)="onEditJob(editJobForm)" mat-raised-button color="primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
