@@ -16,6 +16,7 @@ export class AddJobComponent implements OnInit {
 
   categories: CategoryDTO[] | undefined;
   router: Router | undefined;
+  isSalaryFieldEmpty: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,13 +87,22 @@ export class AddJobComponent implements OnInit {
     );
   }
 
-  // public getCurrentDate(): string{
-  //   let current_date = new Date();
-  //   // let day = current_date.getDate();
-  //   // let month = current_date.getMonth()+1;
-  //   // let year = current_date.getFullYear();
-  //   // return month + '/' + day + '/' + year;
-  // }
+  checkIfSalaryIsDefined(): void {
+    let salary = this.addJobForm.get('salary')?.value;
+    if (salary === null || salary === undefined || salary.length === 0){
+      this.isSalaryFieldEmpty = false;
+      this.addJobForm.controls['salaryCurrency'].disable();
+      this.addJobForm.controls['salaryType'].disable();
+      this.addJobForm.patchValue({
+        salaryCurrency: '',
+        salaryType:''
+      })
+    } else {
+      this.isSalaryFieldEmpty = true;
+      this.addJobForm.controls['salaryCurrency'].enable();
+      this.addJobForm.controls['salaryType'].enable();
+    }
+  }
 
   public onSuccess(): void {
     let router: Router = this.injector.get(Router);
@@ -108,6 +118,7 @@ export class AddJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkIfSalaryIsDefined()
     this.getCategories();
   }
 

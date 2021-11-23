@@ -10,7 +10,7 @@
 
   .section-title{
     font-size: 26px;
-    color: #6434eb;;
+    color: #6434eb;
     text-decoration: none;
     align-items: center;
     margin-top: 15px;
@@ -24,4 +24,8 @@
   .center-button {
     text-align: center;
   }
+
+.mat-form-field mat-label{
+  color: black;
+}
 

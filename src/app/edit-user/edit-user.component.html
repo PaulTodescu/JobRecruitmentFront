@@ -11,7 +11,7 @@
                     <div>
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>First Name</mat-label>
-                            <input formControlName="firstName" matInput type="text" />
+                            <input formControlName="firstName" matInput type="text"/>
                         </mat-form-field>
                     </div>
 
@@ -19,22 +19,42 @@
                     <div>
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Last Name</mat-label>
-                            <input formControlName="lastName" matInput type="text" />
+                            <input formControlName="lastName" matInput type="text"/>
                         </mat-form-field>
                     </div>
 
                     <!--Email-->
                     <div>
-                        <mat-form-field class="full-width" appearance="outline" >
+                        <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Email</mat-label>
-                            <input formControlName="email" matInput type="text" />
+                            <input formControlName="email" matInput type="text"/>
                         </mat-form-field>
                     </div>
-                    <!--Role-->
+
+                    <!--Phone-->
+                    <div>
+                      <mat-form-field class="full-width" appearance="outline" (input)="checkIfPhoneNumberIsPresent()" >
+                        <mat-label>Phone</mat-label>
+                        <input formControlName="phoneNumber" matInput type="text"/>
+                      </mat-form-field>
+                    </div>
+
+                  <!--Contact Method-->
+                  <div>
+                    <mat-form-field class="full-width" appearance="outline" >
+                      <mat-label [ngStyle]="{'color': (isPhoneNumberEmpty? 'black':'#bdbdbd')}">Preferred Contact Method</mat-label>
+                      <mat-select formControlName="contactMethod">
+                        <mat-option value="EMAIL">Email</mat-option>
+                        <mat-option value="PHONE">Phone</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                      <!--Role-->
                     <div>
                         <mat-form-field class="full-width" appearance="outline" >
-                          <mat-label>What do you want?</mat-label>
-                            <mat-select formControlName="role" style="cursor: not-allowed">
+                          <mat-label> What do you want?</mat-label>
+                            <mat-select formControlName="role" [value]="loggedInUser?.role">
                                 <mat-option value="EMPLOYEE">I am looking for jobs</mat-option>
                                 <mat-option value="RECRUITER">I want to hire people</mat-option>
                             </mat-select>

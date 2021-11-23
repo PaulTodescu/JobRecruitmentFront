@@ -32,6 +32,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { RecruiterJobsComponent } from './recruiter-jobs/recruiter-jobs.component';
+import { EditJobComponent } from './edit-job/edit-job.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { RecruiterJobsComponent } from './recruiter-jobs/recruiter-jobs.componen
     AddJobComponent,
     EditUserComponent,
     RecruiterJobsComponent,
+    EditJobComponent,
   ],
   imports: [
     BrowserModule,

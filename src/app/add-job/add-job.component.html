@@ -10,8 +10,8 @@
                       <!--Title-->
                         <div>
                             <mat-form-field class="full-width" appearance="outline">
-                                <mat-label>Title <span style="color: red;">*</span></mat-label>
-                                <input formControlName="title" matInput type="text" />
+                                <mat-label style="color: black">Title <span style="color: red;">*</span></mat-label>
+                                <input formControlName="title" matInput type="text"/>
                             </mat-form-field>
                         </div>
 
@@ -25,7 +25,7 @@
 
                         <!--Salary-->
                         <div>
-                            <mat-form-field class="full-width" appearance="outline">
+                            <mat-form-field class="full-width" appearance="outline" (input)="checkIfSalaryIsDefined()">
                                 <mat-label>Salary</mat-label>
                                 <input formControlName="salary" matInput type="text" />
                             </mat-form-field>
@@ -34,7 +34,7 @@
                         <!--SalaryCurrency-->
                         <div>
                             <mat-form-field class="full-width" appearance="outline">
-                              <mat-label>Currency</mat-label>
+                              <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Currency</mat-label>
                                 <mat-select  formControlName="salaryCurrency">
                                     <mat-option value="RON">RON</mat-option>
                                     <mat-option value="EUR">EUR</mat-option>
@@ -47,7 +47,7 @@
                         <!--SalaryType-->
                         <div>
                             <mat-form-field class="full-width" appearance="outline">
-                              <mat-label>Payment</mat-label>
+                              <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Payment</mat-label>
                                 <mat-select  formControlName="salaryType">
                                     <mat-option value="ONETIME">One Time</mat-option>
                                     <mat-option value="HOURLY">Hourly</mat-option>
@@ -62,7 +62,7 @@
                         <!--Company Name-->
                         <div>
                             <mat-form-field class="full-width" appearance="outline">
-                                <mat-label>Who is offering?</mat-label>
+                                <mat-label>Who is offering? <span style="color: red;">*</span></mat-label>
                                 <input formControlName="companyName" matInput type="text" />
                             </mat-form-field>
                         </div>

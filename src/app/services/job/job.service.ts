@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/entities/category';
 import { Job } from 'src/app/entities/job';
 import { JobDTO } from 'src/app/entities/jobDTO';
 
@@ -25,5 +24,13 @@ export class JobService {
   public getJobsForCategory(categoryId: number): Observable<JobDTO[]>{
     return this.http.get<JobDTO[]>(`${this.apiUrl}/category/${categoryId}/jobs`)
   }
-  
+
+  public getJobById(jobId: number): Observable<Job>{
+    return this.http.get<Job>(`${this.apiUrl}/job/${jobId}`);
+  }
+
+  public editJob(job: Job){
+    return this.http.put<Job>(`${this.apiUrl}/job/{jobId}`, job);
+  }
+
 }

@@ -26,8 +26,8 @@
         <h3>{{job?.createdAt}}</h3>
       </div>
       <div style="width: 30%;">
-        <button type="button" class="btn btn-secondary" > Details <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon> </button>
-        <button type="button" class="btn btn-primary"> Edit <mat-icon style="vertical-align: bottom !important;">edit</mat-icon> </button>
+        <button type="button" class="btn btn-secondary"> Details <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon> </button>
+        <button type="button" class="btn btn-primary" (click)="goToEditJob(job?.id)"> Edit <mat-icon style="vertical-align: bottom !important;">edit</mat-icon> </button>
         <button type="button" class="btn btn-danger"> Delete <mat-icon style="vertical-align: bottom !important;">delete</mat-icon> </button>
       </div>
     </div>

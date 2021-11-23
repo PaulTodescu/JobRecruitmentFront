@@ -8,6 +8,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { HomeComponent } from './home/home.component';
 import { JobsComponent } from './jobs/jobs.component';
 import {RecruiterJobsComponent} from "./recruiter-jobs/recruiter-jobs.component";
+import {EditJobComponent} from "./edit-job/edit-job.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'myjobs',
     component: RecruiterJobsComponent
+  },
+  {
+    path: 'job/edit',
+    component: EditJobComponent
   }
 ];
 

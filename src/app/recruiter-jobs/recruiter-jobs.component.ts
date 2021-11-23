@@ -34,6 +34,14 @@ export class RecruiterJobsComponent implements OnInit {
     this.router.navigateByUrl('job/add');
   }
 
+  goToEditJob(jobId: number | undefined): void{
+    if (jobId !== undefined){
+      this.router.navigate(['job/edit'], {
+        queryParams: {'jobId': jobId}
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.getJobsForCurrentUser();
   }
