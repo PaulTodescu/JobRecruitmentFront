@@ -34,3 +34,11 @@ button {
   background-color: #034953;
   color: white;
 }
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #034953 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
+}

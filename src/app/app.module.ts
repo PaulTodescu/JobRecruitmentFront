@@ -33,6 +33,7 @@ import { AddJobComponent } from './add-job/add-job.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { RecruiterJobsComponent } from './recruiter-jobs/recruiter-jobs.component';
 import { EditJobComponent } from './edit-job/edit-job.component';
+import { JobPageComponent } from './job-page/job-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { EditJobComponent } from './edit-job/edit-job.component';
     EditUserComponent,
     RecruiterJobsComponent,
     EditJobComponent,
+    JobPageComponent,
   ],
   imports: [
     BrowserModule,
