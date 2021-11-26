@@ -5,7 +5,6 @@
   <ng-template #singleJob><p>showing {{nr_jobs}} result</p></ng-template>
   <ng-template #multipleJobs><p>showing {{nr_jobs}} results</p></ng-template>
 </div>
-
 <div class="jobs-container">
 <div *ngIf="nr_jobs !== 0; then showJobs else showNoJobsMessage"></div>
 <ng-template #showJobs>
@@ -19,9 +18,8 @@
             <div class="card-body">
               <h3 style="margin-bottom: 20px"> Offered by: {{job?.companyName}} </h3>
               <div class="separator"></div>
-              <h4 style="margin-top: 20px; margin-bottom: 20px"> Location: {{job?.location}} </h4>
+              <h4 style="margin: 20px 0"> Location: {{job?.location}} </h4>
               <div class="separator"></div>
-<!--              <h4 style="margin-top: 20px; margin-bottom: 20px"> {{job?.createdAt}} </h4>-->
               <button mat-raised-button color="primary" style="background-color: #034953; margin-top: 20px"
               (click)="goToJobDetailsPage(job.id)">Details</button>
             </div>

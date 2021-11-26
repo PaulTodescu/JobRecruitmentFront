@@ -4,32 +4,43 @@
     <div style="width: 70%; margin: 0 auto">
       <div id="tab" class="card justify-content-center">
         <div class="card-body">
-          <h2 class="section-title">{{job?.title}}</h2>
-          <div class="separator"></div>
-
-
-
-            <h3 style="margin: 15px 0"> Offered By: {{job?.companyName}} </h3>
-            <div class="separator"></div>
-            <h3 style="margin: 15px 0"> Location: {{job?.location}} </h3>
-            <div class="separator"></div>
-            <h3 style="margin: 15px 0">Salary: {{job?.salary}} {{job?.salaryCurrency}} ({{job?.salaryType}})</h3>
-            <div class="separator"></div>
-            <div class="footer" style="margin: 15px auto; background-color: #f7f7f7">
-              <h3 style="padding: 5px 0">Available since: {{job?.createdAt}}</h3>
+          <h1 class="section-title" style="font-size: 26px">{{job?.title}}</h1>
+          <div class="info-section" style="display: flex;justify-content: space-between; max-height: 600px">
+            <div class="container" style="float: left; width: 50%; border: 1px solid #ededed">
+              <img [src]="bannerImage" alt="banner">
             </div>
-
-
-
-
-          <h2 class="section-title" style="margin: 20px 0"> Description </h2>
-          <div class="separator"></div>
-          <h3 style="margin: 20px 0">Description: : {{job?.description}}</h3>
-          <div class="separator"></div>
-          <h2 class="section-title" style="margin: 20px 0">Reviews</h2>
-          <div class="separator"></div>
-          <h3 style="margin: 20px 0">User reviews here</h3>
-          <div class="separator"></div>
+            <div style="float: right; width: 50%; margin: auto; text-align: center">
+              <div class="separator"></div>
+              <h3 style="margin: 15px 0"> Offered By: {{job?.companyName}} </h3>
+              <div class="separator"></div>
+              <h3 style="margin: 15px 0"> Location: {{job?.location}} </h3>
+              <div class="separator"></div>
+              <div *ngIf="job?.salary !== null; then showSalary"></div>
+              <ng-template #showSalary>
+              <h3 style="margin: 15px 0">Salary: {{job?.salary}} {{job?.salaryCurrency}} ({{job?.salaryType}})</h3>
+              <div class="separator"></div>
+              </ng-template>
+              <button class="applyButton" mat-raised-button (click)="applyToJob(job?.id)">Apply now</button>
+              <div class="separator"></div>
+            </div>
+          </div>
+          <div class="footer" style="margin: 15px 0; background-color: #f7f7f7">
+            <h3 style="padding: 5px 0; ">Added on: {{job?.createdAt}}</h3>
+          </div>
+          <div style="margin: 0 auto; text-align: center; width: 100%; display: flex; justify-content: center">
+            <h3 class="section-title" [style.background]="flag? '#034953': '#a3acad'"
+                style="width: 50%; cursor: pointer; border-radius: 6px 0 0 6px; font-size: 20px"
+                (click)="switchBetweenDescriptionReviews('description')"> Description </h3>
+            <h3 class="section-title" [style.background]="!flag? '#034953': '#a3acad'"
+                style="width: 50%; cursor: pointer; border-radius: 0 6px 6px 0; font-size: 20px"
+                (click)="switchBetweenDescriptionReviews('reviews')">Reviews</h3>
+          </div>
+          <div *ngIf="flag">
+            <h3 style="margin: 20px 0">Description: {{job?.description}}</h3>
+          </div>
+          <div *ngIf="!flag">
+            <h3 style="margin: 20px 0">User reviews here</h3>
+          </div>
         </div>
       </div>
     </div>

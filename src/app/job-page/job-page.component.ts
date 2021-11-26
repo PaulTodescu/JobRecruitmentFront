@@ -12,6 +12,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class JobPageComponent implements OnInit {
 
   job: Job | undefined;
+  flag: boolean = true
+  bannerImage:string = 'assets/img/default-job-logo.png';
 
   constructor(
     private jobService: JobService,
@@ -32,6 +34,14 @@ export class JobPageComponent implements OnInit {
         alert(error.message);
       }
     )
+  }
+
+  switchBetweenDescriptionReviews(option:string){
+    this.flag = option == 'description';
+  }
+
+  public applyToJob(jobId: number | undefined){
+    alert("applying to job with id: " + jobId);
   }
 
   ngOnInit(): void {

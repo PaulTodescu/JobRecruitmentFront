@@ -11,7 +11,7 @@
           <button class="btn" [style.background]="!flag? '#034953': '#a3acad'" type="button" (click)="switchBetweenLoginRegister('register')" >Register</button>
         </div>
       <div class="card-body">
-          <div *ngIf="flag">
+        <div *ngIf="flag">
             <app-login></app-login>
         </div>
         <div *ngIf="!flag">

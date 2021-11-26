@@ -14,11 +14,7 @@ export class AuthenticationComponent implements OnInit {
   constructor() { }
 
   switchBetweenLoginRegister(option:string){
-    if(option == 'login'){
-      this.flag = true;
-    } else {
-      this.flag = false;
-    }
+    this.flag = option == 'login';
   }
 
   ngOnInit(): void {
