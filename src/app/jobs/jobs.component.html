@@ -22,7 +22,8 @@
               <h4 style="margin-top: 20px; margin-bottom: 20px"> Location: {{job?.location}} </h4>
               <div class="separator"></div>
 <!--              <h4 style="margin-top: 20px; margin-bottom: 20px"> {{job?.createdAt}} </h4>-->
-              <button mat-raised-button color="primary" style="background-color: #034953; margin-top: 20px">Details</button>
+              <button mat-raised-button color="primary" style="background-color: #034953; margin-top: 20px"
+              (click)="goToJobDetailsPage(job.id)">Details</button>
             </div>
             <div class="card-footer text-muted">
               <div *ngIf="getNumberDaysAgo(job.createdAt) === 0; then showToday else showDaysAgo"></div>
@@ -50,4 +51,3 @@
   </div>
 </ng-template>
 </div>
-

@@ -34,8 +34,8 @@ export class EditJobComponent implements OnInit {
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
     private jobService: JobService,
-    private activatedRout: ActivatedRoute,
-    private injector: Injector) {
+    private injector: Injector,
+    private activatedRout: ActivatedRoute) {
       this.activatedRout.queryParams.subscribe(
         data => {
           this.getJobToEdit(data.jobId);

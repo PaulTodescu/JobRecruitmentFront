@@ -1,1 +1,37 @@
-<p>job-page works!</p>
+<app-navbar></app-navbar>
+<div class="center">
+  <div class="row align-items-center h-100">
+    <div style="width: 70%; margin: 0 auto">
+      <div id="tab" class="card justify-content-center">
+        <div class="card-body">
+          <h2 class="section-title">{{job?.title}}</h2>
+          <div class="separator"></div>
+
+
+
+            <h3 style="margin: 15px 0"> Offered By: {{job?.companyName}} </h3>
+            <div class="separator"></div>
+            <h3 style="margin: 15px 0"> Location: {{job?.location}} </h3>
+            <div class="separator"></div>
+            <h3 style="margin: 15px 0">Salary: {{job?.salary}} {{job?.salaryCurrency}} ({{job?.salaryType}})</h3>
+            <div class="separator"></div>
+            <div class="footer" style="margin: 15px auto; background-color: #f7f7f7">
+              <h3 style="padding: 5px 0">Available since: {{job?.createdAt}}</h3>
+            </div>
+
+
+
+
+          <h2 class="section-title" style="margin: 20px 0"> Description </h2>
+          <div class="separator"></div>
+          <h3 style="margin: 20px 0">Description: : {{job?.description}}</h3>
+          <div class="separator"></div>
+          <h2 class="section-title" style="margin: 20px 0">Reviews</h2>
+          <div class="separator"></div>
+          <h3 style="margin: 20px 0">User reviews here</h3>
+          <div class="separator"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
