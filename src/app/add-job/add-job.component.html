@@ -4,8 +4,8 @@
         <div class="col-md-5 col-sm-10 mx-auto">
           <div id="tab" class="card justify-content-center">
               <div class="card-body">
-                <p class="section-title">Add Job</p>
-                <form name="addJobForm" [formGroup]="addJobForm">
+                <h2 class="section-title">Add Job</h2>
+                <form style="margin-top: 30px" name="addJobForm" [formGroup]="addJobForm">
 
                       <!--Title-->
                         <div>
@@ -89,7 +89,7 @@
 
                         <!--Submit Button-->
                         <div class="center-button">
-                            <button (click)="addJob(addJobForm)" mat-raised-button color="primary">Add</button>
+                            <button mat-raised-button (click)="addJob(addJobForm)">Add</button>
                         </div>
                     </form>
                 </div>

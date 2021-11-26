@@ -6,7 +6,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {JobService} from "../services/job/job.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Job} from "../entities/job";
-import {UserDTO} from "../entities/userDTO";
 import Swal from "sweetalert2";
 
 @Component({
@@ -20,17 +19,16 @@ export class EditJobComponent implements OnInit {
   categories: CategoryDTO[] | undefined;
   jobToEdit: Job | undefined;
 
-  editJobForm: FormGroup = this.formBuilder.group({
-    title:[''],
-    description:[''],
-    salary:[undefined],
-    salaryCurrency:[undefined],
-    salaryType:[undefined],
-    createdAt:[],
-    companyName:[''],
-    location:[''],
-    // category:['']
-  })
+  editJobForm = this.formBuilder.group({
+    title: [],
+    description: [],
+    salary: [],
+    salaryCurrency: [],
+    salaryType: [],
+    companyName: [],
+    location: [],
+    categoryId: []
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,10 +56,21 @@ export class EditJobComponent implements OnInit {
   }
 
   public onEditJob(editJobForm: FormGroup): void{
+
     if (this.jobToEdit?.title !== undefined && this.jobToEdit?.description !== undefined
       && this.jobToEdit?.companyName !== undefined && this.jobToEdit.location !== undefined){
-      this.jobService.editJob(editJobForm.value).subscribe(
+      this.jobService.editJob(editJobForm.value, this.jobToEdit.id).subscribe(
         (response: Job) => {
+          // if (this.jobToEdit !== undefined) {
+          //   this.jobService.assignJobToCategory(this.jobToEdit.id, 2).subscribe(
+          //     () => {
+          //       this.onSuccess();
+          //     },
+          //     (error: HttpErrorResponse) => {
+          //       alert(error.message);
+          //     }
+          //   )
+          // }
           this.onSuccess();
         },
         (error: HttpErrorResponse) => {
@@ -89,8 +98,9 @@ export class EditJobComponent implements OnInit {
       this.editJobForm.controls['salaryCurrency'].disable();
       this.editJobForm.controls['salaryType'].disable();
       this.editJobForm.patchValue({
-        salaryCurrency: '',
-        salaryType:''
+        salary:null,
+        salaryCurrency:null,
+        salaryType:null
       })
     } else {
       this.isSalaryFieldEmpty = true;
@@ -106,9 +116,10 @@ export class EditJobComponent implements OnInit {
       salary: job.salary,
       salaryCurrency: job.salaryCurrency,
       salaryType: job.salaryType,
-      createdAt: job.createdAt,
       companyName: job.companyName,
-      location: job.location
+      location: job.location,
+      categoryId:job.categoryId.toString()
+
     })
 
     this.checkIfSalaryIsDefined();
@@ -119,11 +130,11 @@ export class EditJobComponent implements OnInit {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Your profile was updated',
+      title: 'Job was updated',
       showConfirmButton: false,
       timer: 2000
     }).then(function(){
-      router.navigateByUrl("home");
+      router.navigateByUrl("myjobs");
     })
   }
 

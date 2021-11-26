@@ -4,8 +4,8 @@
         <div class="col-md-5 col-sm-10 mx-auto">
           <div id="tab" class="card justify-content-center">
               <div class="card-body">
-                <p class="section-title">Edit Your Profile</p>
-                <form name="editUserForm" [formGroup]="editUserForm">
+                <h2 class="section-title">Edit Your Profile</h2>
+                <form style="margin-top: 30px" name="editUserForm" [formGroup]="editUserForm">
 
                     <!--First Name-->
                     <div>
@@ -63,7 +63,7 @@
 
                     <!--Submit Button-->
                     <div class="center-button">
-                        <button (click)="editUser(editUserForm)" mat-raised-button color="primary">Save</button>
+                        <button mat-raised-button (click)="editUser(editUserForm)">Save</button>
                     </div>
                 </form>
             </div>

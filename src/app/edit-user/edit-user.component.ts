@@ -13,9 +13,17 @@ import Swal from "sweetalert2";
 })
 export class EditUserComponent implements OnInit {
 
-  editUserForm!:FormGroup;
   loggedInUser: UserDTO | undefined;
   isPhoneNumberEmpty: boolean = false;
+
+  editUserForm = this.formBuilder.group({
+    firstName: [],
+    lastName:[],
+    email:[],
+    phoneNumber:[],
+    contactMethod:[],
+    role:[],
+  })
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +47,7 @@ export class EditUserComponent implements OnInit {
     if (this.loggedInUser?.firstName !== undefined && this.loggedInUser?.lastName !== undefined
       && this.loggedInUser?.email !== undefined && this.loggedInUser.role !== undefined){
       this.userService.editUser(editUserForm.value).subscribe(
-        (response: UserDTO) => {
+        () => {
           this.onSuccess();
       },
         (error: HttpErrorResponse) => {
@@ -91,15 +99,8 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoggedInUser();
-    this.editUserForm = this.formBuilder.group({
-      firstName: [],
-      lastName:[],
-      email:[],
-      phoneNumber:[],
-      contactMethod:[],
-      role:[],
-    })
 
+    // these should always be disabled
     this.editUserForm.controls['email'].disable();
     this.editUserForm.controls['role'].disable();
   }

@@ -1,5 +1,5 @@
 <form name="registerForm" [formGroup]="registerForm">
-    
+
     <!--First Name-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
@@ -23,7 +23,7 @@
             <input formControlName="email" matInput type="text" />
         </mat-form-field>
     </div>
-    
+
     <!--Password-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
@@ -55,8 +55,8 @@
             </mat-select>
         </mat-form-field>
       </div>
-    
+
     <div class="center-button">
-        <button (click)="register(registerForm)" mat-raised-button color="primary">Register</button>
+        <button mat-raised-button class="submitButton" (click)="register(registerForm)">Register</button>
     </div>
   </form>

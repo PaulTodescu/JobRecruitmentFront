@@ -94,8 +94,9 @@ export class AddJobComponent implements OnInit {
       this.addJobForm.controls['salaryCurrency'].disable();
       this.addJobForm.controls['salaryType'].disable();
       this.addJobForm.patchValue({
-        salaryCurrency: '',
-        salaryType:''
+        salary: null,
+        salaryCurrency: null,
+        salaryType: null
       })
     } else {
       this.isSalaryFieldEmpty = true;

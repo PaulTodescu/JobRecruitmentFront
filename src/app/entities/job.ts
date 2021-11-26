@@ -8,9 +8,10 @@ export class Job{
     createdAt: string;
     companyName: string;
     location: string;
+    categoryId: number;
 
-    constructor(id: number, title: string, description: string, salary: number, salaryCurrency: string, 
-        salaryType: string, createdAt: string, companyName: string, location: string){
+    constructor(id: number, title: string, description: string, salary: number, salaryCurrency: string,
+        salaryType: string, createdAt: string, companyName: string, location: string, categoryId: number){
             this.id = id;
             this.title = title;
             this.description = description;
@@ -20,6 +21,7 @@ export class Job{
             this.createdAt = createdAt;
             this.companyName = companyName;
             this.location = location;
+            this.categoryId = categoryId;
         }
 
 }

@@ -2,30 +2,36 @@
     background-color: white;
   }
 
-  .center {
-    margin-top: 30px;
-    text-align: center;
-    overflow: hidden;
-  }
+.center {
+  margin-top: 30px;
+  text-align: center;
+  overflow: hidden;
+}
 
-  .section-title{
-    font-size: 26px;
-    color: #6434eb;
-    text-decoration: none;
-    align-items: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
-  }
+.section-title{
+  font-size: 26px;
+  color: white;
+  background-color: #034953;
+  text-decoration: none;
+  align-items: center;
+  padding: 20px 0;
+  border-radius: 7px;
+}
 
-  .full-width {
-    width: 100%;
-  }
+.full-width {
+  width: 100%;
+}
 
-  .center-button {
-    text-align: center;
-  }
+.center-button {
+  text-align: center;
+}
 
 .mat-form-field mat-label{
   color: black;
+}
+
+button {
+  background-color: #034953 !important;
+  color: white !important;
 }
 

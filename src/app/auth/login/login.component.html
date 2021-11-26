@@ -7,7 +7,7 @@
             <input formControlName="email" matInput type="text" />
         </mat-form-field>
     </div>
-    
+
     <!--Password-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
@@ -20,9 +20,9 @@
             </button>
         </mat-form-field>
     </div>
-    
+
     <div class="center-button">
-        <button (click)="login(loginForm)" mat-raised-button color="primary">Login</button>
+        <button class="submitButton" mat-raised-button (click)="login(loginForm)">Login</button>
     </div>
   </form>
 
