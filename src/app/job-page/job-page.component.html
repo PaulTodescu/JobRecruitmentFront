@@ -36,7 +36,7 @@
                 (click)="switchBetweenDescriptionReviews('reviews')">Reviews</h3>
           </div>
           <div *ngIf="flag">
-            <h3 style="margin: 20px 0">Description: {{job?.description}}</h3>
+            <h3 style="margin: 20px 0">{{job?.description}}</h3>
           </div>
           <div *ngIf="!flag">
             <h3 style="margin: 20px 0">User reviews here</h3>
