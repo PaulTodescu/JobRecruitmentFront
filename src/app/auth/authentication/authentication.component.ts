@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-authentication',
@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class AuthenticationComponent implements OnInit {
 
   flag: boolean = true
-
-  backgroundImage:string = 'assets/img/banner.jpg';
 
   constructor() { }
 

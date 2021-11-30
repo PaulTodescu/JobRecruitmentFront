@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JobDTO} from '../entities/jobDTO';
 import {JobService} from '../services/job/job.service';
@@ -12,6 +12,7 @@ import {CategoryService} from "../services/category/category.service";
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
+
 
   categoryId: number | undefined;
   categoryName: string | undefined;
@@ -56,16 +57,6 @@ export class JobsComponent implements OnInit {
     return Math.trunc(difference_in_millis / (60000 * 60 * 24));
 
   }
-
-  // public getJobsRow(index: number): JobDTO[]{
-  //   if (this.jobs != undefined){
-  //     let startIndex = index * 4;
-  //     let endIndex = startIndex + 4;
-  //     return this.jobs.slice(startIndex, endIndex)
-  //   } else {
-  //     return new Array(0);
-  //   }
-  // }
 
   public goToJobDetailsPage(jobId: number){
     this.router.navigate(['/job/details'], {

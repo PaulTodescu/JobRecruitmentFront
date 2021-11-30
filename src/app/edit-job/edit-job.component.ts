@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CategoryDTO} from "../entities/categoryDTO";
 import {CategoryService} from "../services/category/category.service";
@@ -7,6 +7,7 @@ import {JobService} from "../services/job/job.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Job} from "../entities/job";
 import Swal from "sweetalert2";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-job',
@@ -37,13 +38,7 @@ export class EditJobComponent implements OnInit {
     private categoryService: CategoryService,
     private jobService: JobService,
     private injector: Injector,
-    private activatedRout: ActivatedRoute) {
-      this.activatedRout.queryParams.subscribe(
-        data => {
-          this.getJobToEdit(data.jobId);
-          this.getJobImageName(data.jobId);
-        }
-    )
+    @Inject(MAT_DIALOG_DATA) public data: { jobId: number }) {
   }
 
   public getJobToEdit(jobId: number): void{
@@ -63,17 +58,7 @@ export class EditJobComponent implements OnInit {
     if (this.jobToEdit?.title !== undefined && this.jobToEdit?.description !== undefined
       && this.jobToEdit?.companyName !== undefined && this.jobToEdit.location !== undefined){
       this.jobService.editJob(editJobForm.value, this.jobToEdit.id).subscribe(
-        (response: Job) => {
-          // if (this.jobToEdit !== undefined) {
-          //   this.jobService.assignJobToCategory(this.jobToEdit.id, 2).subscribe(
-          //     () => {
-          //       this.onSuccess();
-          //     },
-          //     (error: HttpErrorResponse) => {
-          //       alert(error.message);
-          //     }
-          //   )
-          // }
+        () => {
           this.onSuccess();
         },
         (error: HttpErrorResponse) => {
@@ -138,6 +123,7 @@ export class EditJobComponent implements OnInit {
 
   public onSuccess(): void {
     let router: Router = this.injector.get(Router);
+    let dialogRef: MatDialogRef<EditJobComponent> = this.injector.get(MatDialogRef);
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -145,7 +131,9 @@ export class EditJobComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000
     }).then(function(){
-      router.navigateByUrl("myjobs");
+      dialogRef.close();
+      location.reload();
+      // router.navigateByUrl("myjobs");
     })
   }
 
@@ -174,6 +162,8 @@ export class EditJobComponent implements OnInit {
   ngOnInit(): void {
     this.checkIfSalaryIsDefined();
     this.getCategories();
+    this.getJobToEdit(this.data.jobId);
+    this.getJobImageName(this.data.jobId);
   }
 
 }

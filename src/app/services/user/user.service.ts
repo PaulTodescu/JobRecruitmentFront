@@ -44,4 +44,20 @@ export class UserService {
     return this.http.put<UserDTO>(`${this.apiUrl}/user`, user);
   }
 
+  public getLoggedInUserRole(): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/user/role`, { responseType: 'text' as 'json'});
+  }
+
+  public loggedIn(): boolean {
+    return !!localStorage.getItem('token')
+  }
+
+  public checkIfLoggedInUserIsRecruiter(): Observable<boolean>{
+    return this.http.get<boolean>(`${this.apiUrl}/user/role/recruiter`);
+  }
+
+  public checkIfLoggedInUserIsEmployee(): Observable<boolean>{
+    return this.http.get<boolean>(`${this.apiUrl}/user/role/employee`);
+  }
+
 }

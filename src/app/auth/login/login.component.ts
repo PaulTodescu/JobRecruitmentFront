@@ -1,9 +1,9 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationResponse } from 'src/app/entities/AuthenticationResponse';
-import { UserService } from 'src/app/services/user/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {Component, Injector, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationResponse} from 'src/app/entities/AuthenticationResponse';
+import {UserService} from 'src/app/services/user/user.service';
+import {HttpErrorResponse} from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 
@@ -14,14 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup; 
+  loginForm!: FormGroup;
   hidePassword: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private injector: Injector) { }
-  
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email:[''],
@@ -38,11 +38,10 @@ export class LoginComponent implements OnInit {
         var email = this.loginForm.get('email')?.value;
         this.userService.getUsernameByEmail(email).subscribe(
           (usernameResponse) => {
-            var username = usernameResponse;
-            this.onSuccess(username);
+            this.onSuccess(usernameResponse);
           }
         )
-       
+
       },
       (error: HttpErrorResponse) => {
         this.showWrongCredentialsErrorMessage();

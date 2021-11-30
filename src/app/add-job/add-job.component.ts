@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {CategoryDTO} from '../entities/categoryDTO';
 import {CategoryService} from '../services/category/category.service';
 import {JobService} from '../services/job/job.service';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-job',
@@ -119,6 +120,7 @@ export class AddJobComponent implements OnInit {
 
   public onSuccess(): void {
     let router: Router = this.injector.get(Router);
+    let dialogRef: MatDialogRef<AddJobComponent> = this.injector.get(MatDialogRef);
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -126,7 +128,9 @@ export class AddJobComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000
     }).then(function(){
-      router.navigateByUrl("home");
+      dialogRef.close();
+      location.reload()
+      // router.navigateByUrl("home");
     })
   }
 

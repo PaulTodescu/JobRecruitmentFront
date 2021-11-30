@@ -7,7 +7,8 @@ import {JobService} from "../services/job/job.service";
 import Swal from "sweetalert2";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {JobDetailsComponent} from "../job-details/job-details.component";
-
+import {AddJobComponent} from "../add-job/add-job.component";
+import {EditJobComponent} from "../edit-job/edit-job.component";
 
 @Component({
   selector: 'app-recruiter-jobs',
@@ -38,19 +39,29 @@ export class RecruiterJobsComponent implements OnInit {
   }
 
   public goToAddJob(): void{
-    this.router.navigateByUrl('job/add');
+    // this.router.navigateByUrl('job/add');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height = "90%";
+    this.dialog.open(AddJobComponent, dialogConfig);
   }
 
   goToEditJob(jobId: number): void{
-    if (jobId !== undefined){
-      this.router.navigate(['job/edit'], {
-        queryParams: {'jobId': jobId}
-      });
-    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height = "90%";
+    dialogConfig.data = {jobId: jobId};
+    this.dialog.open(EditJobComponent, dialogConfig);
   }
 
   openJobDetailsModal(jobId: number): void{
-    this.dialog.open(JobDetailsComponent);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "40%";
+    dialogConfig.height = "90%";
+    dialogConfig.data = {jobId: jobId};
+    this.dialog.open(JobDetailsComponent, dialogConfig);
   }
 
   deleteJob(jobId: number): void {

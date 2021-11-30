@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AuthenticationComponent } from './auth/authentication/authentication.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -36,7 +37,6 @@ import { JobPageComponent } from './job-page/job-page.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ButtonModule} from 'primeng/button';
 import { JobDetailsComponent } from './job-details/job-details.component';
-
 
 
 @NgModule({
@@ -75,7 +75,8 @@ import { JobDetailsComponent } from './job-details/job-details.component';
     MatIconModule,
     MatMenuModule,
     InputTextareaModule,
-    ButtonModule
+    ButtonModule,
+    MatToolbarModule
   ],
 
   providers: [AuthInterceptorProvider],

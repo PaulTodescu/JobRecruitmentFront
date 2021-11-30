@@ -1,1 +1,71 @@
-<p>job-details works!</p>
+<div class="card-body" style="overflow: hidden !important;">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h2 class="section-title">Job Details</h2>
+  <form style="margin-top: 30px" name="editJobForm" [formGroup]="detailsJobForm">
+    <!--Title-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label style="color: black">Title</mat-label>
+        <input formControlName="title" matInput type="text"/>
+      </mat-form-field>
+    </div>
+    <!--Description-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput [rows]="5" pInputTextarea [autoResize]="true"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <!--Salary-->
+      <mat-form-field appearance="outline" style="margin-right: 8px">
+        <mat-label>Salary</mat-label>
+        <input formControlName="salary" matInput type="text" />
+      </mat-form-field>
+      <!--SalaryCurrency-->
+      <mat-form-field appearance="outline" style="margin-right: 8px">
+        <mat-label>Currency</mat-label>
+        <input formControlName="salaryCurrency" matInput type="text" />
+      </mat-form-field>
+      <!--SalaryType-->
+      <mat-form-field appearance="outline">
+        <mat-label>Payment</mat-label>
+        <input formControlName="salaryType" matInput type="text" />
+      </mat-form-field>
+    </div>
+    <!--Company Name-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Who is offering?</mat-label>
+        <input formControlName="companyName" matInput type="text" />
+      </mat-form-field>
+    </div>
+    <!--Location-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input formControlName="location" matInput type="text"/>
+      </mat-form-field>
+    </div>
+    <!--Category-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select  formControlName="categoryId">
+          <mat-option *ngFor="let category of categories" value="{{ category?.id }}">
+            {{ category?.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!--CreatedAt-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Created At</mat-label>
+        <input formControlName="createdAt" matInput type="text"/>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

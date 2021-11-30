@@ -1,112 +1,103 @@
-<app-navbar></app-navbar>
-<div class="center">
-  <div class="row align-items-center h-100">
-    <div class="col-md-5 col-sm-10 mx-auto">
-      <div id="tab" class="card justify-content-center">
-        <div class="card-body">
-          <h2 class="section-title">Edit Job</h2>
-          <form style="margin-top: 30px" name="editJobForm" [formGroup]="editJobForm">
+<div class="card-body" style="overflow: hidden !important;">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h2 class="section-title">Edit Job</h2>
+  <form style="margin-top: 30px" name="editJobForm" [formGroup]="editJobForm">
 
-            <!--Title-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label style="color: black">Title <span style="color: red;">*</span></mat-label>
-                <input formControlName="title" matInput type="text"/>
-              </mat-form-field>
-            </div>
-
-            <!--Description-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Description <span style="color: red;">*</span></mat-label>
-                <textarea formControlName="description" matInput [rows]="5" pInputTextarea [autoResize]="true"></textarea>
-              </mat-form-field>
-            </div>
-
-            <!--Salary-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline" (input)="checkIfSalaryIsDefined()">
-                <mat-label>Salary</mat-label>
-                <input formControlName="salary" matInput type="text" />
-              </mat-form-field>
-            </div>
-
-            <!--SalaryCurrency-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Currency</mat-label>
-                <mat-select  formControlName="salaryCurrency">
-                  <mat-option value="RON">RON</mat-option>
-                  <mat-option value="EUR">EUR</mat-option>
-                  <mat-option value="USD">USD</mat-option>
-                  <mat-option value="GBD">GBD</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <!--SalaryType-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Payment</mat-label>
-                <mat-select  formControlName="salaryType">
-                  <mat-option value="ONETIME">One Time</mat-option>
-                  <mat-option value="HOURLY">Hourly</mat-option>
-                  <mat-option value="DAILY">Daily</mat-option>
-                  <mat-option value="WEEKLY">Weekly</mat-option>
-                  <mat-option value="MONTHLY">Monthly</mat-option>
-                  <mat-option value="ANNUAL">Annual</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <!--Company Name-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Who is offering? <span style="color: red;">*</span></mat-label>
-                <input formControlName="companyName" matInput type="text" />
-              </mat-form-field>
-            </div>
-
-            <!--Location-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Location <span style="color: red;">*</span></mat-label>
-                <input formControlName="location" matInput type="text" [value]="jobToEdit?.location"/>
-              </mat-form-field>
-            </div>
-
-            <!--Category-->
-            <div>
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Category <span style="color: red;">*</span></mat-label>
-                <mat-select  formControlName="categoryId">
-                  <mat-option *ngFor="let category of categories" value="{{ category?.id }}">
-                    {{ category?.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <!--Image-->
-            <div style="border: 1px solid #e6e6e6; display: flex; border-radius: 5px">
-              <label for="file-input">
-                <mat-icon style="vertical-align: bottom" inline=true>image</mat-icon>
-                &nbsp;Import Image
-              </label>
-              <h4 style="float:left; margin: auto 5px">
-                <strong >Selected: </strong>
-                <span  id="file-name">{{imagePath}}</span>
-              </h4>
-              <input type="file" id="file-input" (change)="uploadFile($event)">
-            </div>
-
-            <!--Submit Button-->
-            <div class="center-button">
-              <button mat-raised-button style="margin-top: 25px" (click)="onEditJob(editJobForm)">Save</button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <!--Title-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label style="color: black">Title <span style="color: red;">*</span></mat-label>
+        <input formControlName="title" matInput type="text"/>
+      </mat-form-field>
     </div>
-  </div>
+
+    <!--Description-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Description <span style="color: red;">*</span></mat-label>
+        <textarea #input maxlength="500" formControlName="description" matInput [rows]="5" pInputTextarea [autoResize]="true"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+      </mat-form-field>
+    </div>
+    <div>
+
+      <!--Salary-->
+      <mat-form-field  appearance="outline" (input)="checkIfSalaryIsDefined()" style="margin-right: 8px">
+        <mat-label>Salary</mat-label>
+        <input  formControlName="salary" matInput type="text" />
+      </mat-form-field>
+
+      <!--SalaryCurrency-->
+      <mat-form-field  appearance="outline" style="margin-right: 8px">
+        <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Currency</mat-label>
+        <mat-select  formControlName="salaryCurrency">
+          <mat-option value="RON">RON</mat-option>
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="USD">USD</mat-option>
+          <mat-option value="GBD">GBD</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--SalaryType-->
+      <mat-form-field appearance="outline">
+        <mat-label [ngStyle]="{'color': (isSalaryFieldEmpty? 'black':'#bdbdbd')}">Payment</mat-label>
+        <mat-select  formControlName="salaryType">
+          <mat-option value="ONETIME">One Time</mat-option>
+          <mat-option value="HOURLY">Hourly</mat-option>
+          <mat-option value="DAILY">Daily</mat-option>
+          <mat-option value="WEEKLY">Weekly</mat-option>
+          <mat-option value="MONTHLY">Monthly</mat-option>
+          <mat-option value="ANNUAL">Annual</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Company Name-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Who is offering? <span style="color: red;">*</span></mat-label>
+        <input formControlName="companyName" matInput type="text" />
+      </mat-form-field>
+    </div>
+
+    <!--Location-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Location <span style="color: red;">*</span></mat-label>
+        <input formControlName="location" matInput type="text" [value]="jobToEdit?.location"/>
+      </mat-form-field>
+    </div>
+
+    <!--Category-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Category <span style="color: red;">*</span></mat-label>
+        <mat-select  formControlName="categoryId">
+          <mat-option *ngFor="let category of categories" value="{{ category?.id }}">
+            {{ category?.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Image-->
+    <div style="border: 1px solid #e6e6e6; display: flex; border-radius: 5px">
+      <label for="file-input">
+        <mat-icon style="vertical-align: bottom" inline=true>image</mat-icon>
+        &nbsp;Import Image
+      </label>
+      <h4 style="float:left; margin: auto 5px">
+        <strong >Selected: </strong>
+        <span  id="file-name">{{imagePath}}</span>
+      </h4>
+      <input type="file" id="file-input" (change)="uploadFile($event)">
+    </div>
+
+    <!--Submit Button-->
+    <div class="center-button">
+      <button class="submitButton" mat-raised-button style="margin-top: 25px" (click)="onEditJob(editJobForm)">Save</button>
+    </div>
+  </form>
 </div>

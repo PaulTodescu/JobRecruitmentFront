@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
 
   public logout(): void{
     localStorage.removeItem('token');
-    this.router.navigateByUrl('authenticate');
+    this.router.navigateByUrl('');
   }
 
   ngOnInit(): void {
