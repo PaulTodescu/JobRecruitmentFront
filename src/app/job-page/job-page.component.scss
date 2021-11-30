@@ -3,7 +3,7 @@
 }
 
 .center {
-  margin-top: 30px;
+  margin: 30px 0;
   text-align: center;
   overflow: hidden;
 }
@@ -23,7 +23,7 @@
 .separator{
   height: 1px;
   background-color: #ededed;
-  width: 75%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -40,18 +40,6 @@
   margin: 15px 0;
   color: white !important;
 }
-
-//.fill {
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  overflow: hidden
-//}
-//.fill img {
-//  display: block;
-//  width: 100%;
-//  height: auto;
-//}
 
 .container {
   display: flex;
@@ -85,3 +73,10 @@ h3 {
   color: white;
   margin: 0 3px;
 }
+
+.description {
+  text-align: left !important;
+  margin-left: 10px;
+}
+
+

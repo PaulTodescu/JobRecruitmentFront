@@ -20,7 +20,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 
-
 import { AuthenticationComponent } from './auth/authentication/authentication.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -34,6 +33,11 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { RecruiterJobsComponent } from './recruiter-jobs/recruiter-jobs.component';
 import { EditJobComponent } from './edit-job/edit-job.component';
 import { JobPageComponent } from './job-page/job-page.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ButtonModule} from 'primeng/button';
+import { JobDetailsComponent } from './job-details/job-details.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +53,7 @@ import { JobPageComponent } from './job-page/job-page.component';
     RecruiterJobsComponent,
     EditJobComponent,
     JobPageComponent,
+    JobDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,8 @@ import { JobPageComponent } from './job-page/job-page.component';
     MatDialogModule,
     MatIconModule,
     MatMenuModule,
+    InputTextareaModule,
+    ButtonModule
   ],
 
   providers: [AuthInterceptorProvider],

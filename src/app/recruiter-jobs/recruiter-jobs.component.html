@@ -10,7 +10,7 @@
   <div class="job-row" style="color: white !important; background-color: #034953">
     <div style="width: 70%;">
       <h3>Title</h3>
-      <h3>Company</h3>
+      <h3>Offered By</h3>
       <h3>Date</h3>
     </div>
     <div style="width: 30%;">
@@ -26,7 +26,7 @@
         <h3>{{job?.createdAt}}</h3>
       </div>
       <div style="width: 30%;">
-        <button type="button" class="btn btn-secondary"> Details <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon> </button>
+        <button type="button" class="btn btn-secondary" (click)="openJobDetailsModal(job.id)"> Details <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon> </button>
         <button type="button" class="btn btn-primary" (click)="goToEditJob(job.id)"> Edit <mat-icon style="vertical-align: bottom !important;">edit</mat-icon> </button>
         <button type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(job.id, job.title)">
           Delete

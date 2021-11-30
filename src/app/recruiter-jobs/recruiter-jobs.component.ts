@@ -5,6 +5,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {JobService} from "../services/job/job.service";
 import Swal from "sweetalert2";
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {JobDetailsComponent} from "../job-details/job-details.component";
+
 
 @Component({
   selector: 'app-recruiter-jobs',
@@ -19,7 +22,8 @@ export class RecruiterJobsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private jobService: JobService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   public getJobsForCurrentUser(): void{
     this.userService.getJobsForCurrentUser().subscribe(
@@ -43,6 +47,10 @@ export class RecruiterJobsComponent implements OnInit {
         queryParams: {'jobId': jobId}
       });
     }
+  }
+
+  openJobDetailsModal(jobId: number): void{
+    this.dialog.open(JobDetailsComponent);
   }
 
   deleteJob(jobId: number): void {

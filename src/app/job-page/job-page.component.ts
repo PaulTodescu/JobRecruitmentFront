@@ -15,12 +15,15 @@ export class JobPageComponent implements OnInit {
   flag: boolean = true
   bannerImage:string = 'assets/img/default-job-logo.png';
 
+  jobImage: string | undefined;
+
   constructor(
     private jobService: JobService,
     private activatedRout: ActivatedRoute) {
       this.activatedRout.queryParams.subscribe(
         data => {
           this.getJob(data.jobId);
+          this.getJobImage(data.jobId);
         }
       )
   }
@@ -29,6 +32,11 @@ export class JobPageComponent implements OnInit {
     this.jobService.getJobById(jobId).subscribe(
       (response: Job) => {
         this.job = response;
+        this.job.description =
+          '<h3>' + this.job.description
+            .replace(/ /g, '\u00a0')
+            .replace(/(\r\n|\r|\n)/g, '<br />') +
+          '</h3>';
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -36,13 +44,25 @@ export class JobPageComponent implements OnInit {
     )
   }
 
-  switchBetweenDescriptionReviews(option:string){
+  public getJobImage(jobId: number) {
+    this.jobService.getJobImage(jobId).subscribe(
+      (response: string) => {
+        this.jobImage = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  switchBetweenDescriptionReviews(option: string){
     this.flag = option == 'description';
   }
 
   public applyToJob(jobId: number | undefined){
     alert("applying to job with id: " + jobId);
   }
+
 
   ngOnInit(): void {
   }

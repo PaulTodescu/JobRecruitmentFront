@@ -18,6 +18,8 @@ export class EditJobComponent implements OnInit {
   isSalaryFieldEmpty: boolean = false;
   categories: CategoryDTO[] | undefined;
   jobToEdit: Job | undefined;
+  imagePath: string | undefined;
+  jobImage: File | undefined;
 
   editJobForm = this.formBuilder.group({
     title: [],
@@ -39,6 +41,7 @@ export class EditJobComponent implements OnInit {
       this.activatedRout.queryParams.subscribe(
         data => {
           this.getJobToEdit(data.jobId);
+          this.getJobImageName(data.jobId);
         }
     )
   }
@@ -75,6 +78,14 @@ export class EditJobComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
           alert(error.message);
+        }
+      )
+      this.jobService.assignImageToJob(this.jobToEdit.id, this.jobImage).subscribe(
+        () => {
+          console.log(this.jobImage);
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message)
         }
       )
     }
@@ -136,6 +147,28 @@ export class EditJobComponent implements OnInit {
     }).then(function(){
       router.navigateByUrl("myjobs");
     })
+  }
+
+  private getJobImageName(jobId: any) {
+    this.jobService.getImageNameForJob(jobId).subscribe(
+      (response: string) => {
+        this.imagePath = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    )
+  }
+
+  uploadFile(event: Event) {
+    this.imagePath = 'Default';
+    this.jobImage = undefined;
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      this.imagePath = fileList[0].name;
+      this.jobImage = fileList[0];
+    }
   }
 
   ngOnInit(): void {

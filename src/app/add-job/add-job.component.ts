@@ -1,4 +1,4 @@
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Component, Injector, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -17,6 +17,8 @@ export class AddJobComponent implements OnInit {
   categories: CategoryDTO[] | undefined;
   router: Router | undefined;
   isSalaryFieldEmpty: boolean = false;
+  imagePath: string = 'Default';
+  jobImage: File | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +48,7 @@ export class AddJobComponent implements OnInit {
       }
     )
   }
+
 
   public addJob(addJobForm: FormGroup): void{
 
@@ -78,7 +81,15 @@ export class AddJobComponent implements OnInit {
           },
         (error: HttpErrorResponse) => {
           alert(error.message);
-        }
+          }
+        )
+        this.jobService.assignImageToJob(jobIdResponse, this.jobImage).subscribe(
+          () => {
+            console.log(this.jobImage);
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message)
+          }
         )
       },
       (error: HttpErrorResponse) => {
@@ -86,6 +97,7 @@ export class AddJobComponent implements OnInit {
       }
     );
   }
+
 
   checkIfSalaryIsDefined(): void {
     let salary = this.addJobForm.get('salary')?.value;
@@ -116,6 +128,17 @@ export class AddJobComponent implements OnInit {
     }).then(function(){
       router.navigateByUrl("home");
     })
+  }
+
+  uploadFile(event: Event) {
+    this.imagePath = 'Default';
+    this.jobImage = undefined;
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      this.imagePath = fileList[0].name;
+      this.jobImage = fileList[0];
+    }
   }
 
   ngOnInit(): void {

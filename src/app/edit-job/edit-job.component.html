@@ -19,7 +19,7 @@
             <div>
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Description <span style="color: red;">*</span></mat-label>
-                <input formControlName="description" matInput type="text" />
+                <textarea formControlName="description" matInput [rows]="5" pInputTextarea [autoResize]="true"></textarea>
               </mat-form-field>
             </div>
 
@@ -87,9 +87,22 @@
               </mat-form-field>
             </div>
 
+            <!--Image-->
+            <div style="border: 1px solid #e6e6e6; display: flex; border-radius: 5px">
+              <label for="file-input">
+                <mat-icon style="vertical-align: bottom" inline=true>image</mat-icon>
+                &nbsp;Import Image
+              </label>
+              <h4 style="float:left; margin: auto 5px">
+                <strong >Selected: </strong>
+                <span  id="file-name">{{imagePath}}</span>
+              </h4>
+              <input type="file" id="file-input" (change)="uploadFile($event)">
+            </div>
+
             <!--Submit Button-->
             <div class="center-button">
-              <button mat-raised-button (click)="onEditJob(editJobForm)">Save</button>
+              <button mat-raised-button style="margin-top: 25px" (click)="onEditJob(editJobForm)">Save</button>
             </div>
           </form>
         </div>
