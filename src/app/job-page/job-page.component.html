@@ -20,8 +20,10 @@
               <h3 style="margin: 15px 0">Salary: {{job?.salary}} {{job?.salaryCurrency}} ({{job?.salaryType}})</h3>
               <div class="separator"></div>
               </ng-template>
-              <button class="applyButton" mat-raised-button (click)="applyToJob(job?.id)">Apply now</button>
-              <div class="separator"></div>
+              <div *ngIf="userRole === 'EMPLOYEE'">
+                <button class="applyButton" mat-raised-button (click)="applyToJob(job?.id)">Apply now</button>
+                <div class="separator"></div>
+              </div>
             </div>
           </div>
           <div class="footer" style="margin: 15px 0; background-color: #f7f7f7">

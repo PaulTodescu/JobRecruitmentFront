@@ -1,1 +1,66 @@
-<p>application-page works!</p>
+<div class="card-body" style="overflow: hidden !important;">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h2 class="section-title">Apply To Job</h2>
+  <form style="margin-top: 30px" name="editJobForm" [formGroup]="applicationForm">
+
+    <!--  First Name-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input formControlName="firstName" matInput type="text"/>
+      </mat-form-field>
+    </div>
+
+    <!--  Last Name-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastName" matInput type="text"/>
+      </mat-form-field>
+    </div>
+
+    <!--  Email-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput type="text"/>
+      </mat-form-field>
+    </div>
+
+    <!--  Phone-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline" >
+        <mat-label>Phone</mat-label>
+        <input formControlName="phoneNumber" matInput type="text"/>
+      </mat-form-field>
+    </div>
+
+    <!--  Contact Method-->
+    <div>
+      <mat-form-field class="full-width" appearance="outline" >
+        <mat-label>Preferred Contact Method</mat-label>
+        <input formControlName="contactMethod" matInput type="text"/>
+      </mat-form-field>
+    </div>
+
+    <!--Image-->
+    <div style="border: 1px solid #e6e6e6; display: flex; border-radius: 5px">
+      <label for="file-input">
+        <mat-icon style="vertical-align: bottom" inline=true>attachment</mat-icon>
+        &nbsp;Add CV
+      </label>
+      <h4 style="float:left; margin: auto 5px">
+        <strong >Selected: </strong>
+        <span  id="file-name">{{cvPath}}</span>
+      </h4>
+      <input type="file" id="file-input" (change)="uploadFile($event)">
+    </div>
+
+    <!--Submit Button-->
+    <div class="center-button">
+      <button class="submitButton" mat-raised-button style="margin-top: 50px" (click)="sendApplication()">Send</button>
+    </div>
+  </form>
+</div>

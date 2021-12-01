@@ -6,6 +6,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddJobComponent} from "../add-job/add-job.component";
 import {ApplicationPageComponent} from "../application-page/application-page.component";
+import {UserService} from "../services/user/user.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-job-page',
@@ -16,12 +18,14 @@ export class JobPageComponent implements OnInit {
 
   job: Job | undefined;
   flag: boolean = true;
+  userRole: string | undefined;
 
   jobImage: string | undefined;
 
   constructor(
     private jobService: JobService,
     private dialog: MatDialog,
+    private userService: UserService,
     private activatedRout: ActivatedRoute) {
       this.activatedRout.queryParams.subscribe(
         data => {
@@ -58,22 +62,49 @@ export class JobPageComponent implements OnInit {
     )
   }
 
+  public getCurrentUserRole(): void {
+    this.userService.getLoggedInUserRole().subscribe(
+      (response: string) => {
+        this.userRole = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
   switchBetweenDescriptionReviews(option: string){
     this.flag = option == 'description';
   }
 
   public applyToJob(jobId: number | undefined){
-    if (jobId != undefined) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "40%";
-      dialogConfig.height = "90%";
-      this.dialog.open(ApplicationPageComponent, dialogConfig);
+    if (this.userRole === 'EMPLOYEE') {
+      if (jobId != undefined) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "40%";
+        dialogConfig.height = "85%";
+        dialogConfig.data = {jobId: jobId};
+        this.dialog.open(ApplicationPageComponent, dialogConfig);
+      }
     }
   }
 
+  // public showWrongUserRoleMessage(): void{
+  //   Swal.fire({
+  //     position: 'center',
+  //     icon: 'error',
+  //     title: 'Recruiters cannot apply to jobs',
+  //     showConfirmButton: false,
+  //     timer: 2500
+  //   }).then(function(){
+  //     // window.location.reload();
+  //   })
+  // }
+
 
   ngOnInit(): void {
+    this.getCurrentUserRole();
   }
 
 }
