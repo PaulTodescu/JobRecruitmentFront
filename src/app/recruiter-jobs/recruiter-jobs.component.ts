@@ -39,7 +39,6 @@ export class RecruiterJobsComponent implements OnInit {
   }
 
   public goToAddJob(): void{
-    // this.router.navigateByUrl('job/add');
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";

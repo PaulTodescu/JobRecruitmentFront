@@ -3,6 +3,9 @@ import {Job} from "../entities/job";
 import {JobService} from "../services/job/job.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {AddJobComponent} from "../add-job/add-job.component";
+import {ApplicationPageComponent} from "../application-page/application-page.component";
 
 @Component({
   selector: 'app-job-page',
@@ -12,13 +15,13 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class JobPageComponent implements OnInit {
 
   job: Job | undefined;
-  flag: boolean = true
-  bannerImage:string = 'assets/img/default-job-logo.png';
+  flag: boolean = true;
 
   jobImage: string | undefined;
 
   constructor(
     private jobService: JobService,
+    private dialog: MatDialog,
     private activatedRout: ActivatedRoute) {
       this.activatedRout.queryParams.subscribe(
         data => {
@@ -60,7 +63,13 @@ export class JobPageComponent implements OnInit {
   }
 
   public applyToJob(jobId: number | undefined){
-    alert("applying to job with id: " + jobId);
+    if (jobId != undefined) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%";
+      dialogConfig.height = "90%";
+      this.dialog.open(ApplicationPageComponent, dialogConfig);
+    }
   }
 
 

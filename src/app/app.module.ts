@@ -37,6 +37,7 @@ import { JobPageComponent } from './job-page/job-page.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ButtonModule} from 'primeng/button';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { ApplicationPageComponent } from './application-page/application-page.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
     EditJobComponent,
     JobPageComponent,
     JobDetailsComponent,
+    ApplicationPageComponent,
   ],
   imports: [
     BrowserModule,

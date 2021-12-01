@@ -11,6 +11,7 @@ import { UserService } from '../services/user/user.service';
 export class NavbarComponent implements OnInit {
 
   username: string | undefined;
+  userRole: string | undefined;
 
   constructor(
     private userService: UserService,
@@ -20,6 +21,17 @@ export class NavbarComponent implements OnInit {
     this.userService.getUsername().subscribe(
       (response: string) => {
         this.username = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public getCurrentUserRole(): void {
+    this.userService.getLoggedInUserRole().subscribe(
+      (response: string) => {
+        this.userRole = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -50,6 +62,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
+    this.getCurrentUserRole();
   }
 
 }
