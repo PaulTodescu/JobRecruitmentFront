@@ -7,6 +7,9 @@ import {Job} from "../entities/job";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CategoryDTO} from "../entities/categoryDTO";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {UserDTO} from "../entities/userDTO";
+import {UserService} from "../services/user/user.service";
+import {Application} from "../entities/application";
 
 @Component({
   selector: 'app-job-details',
@@ -16,8 +19,8 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 export class JobDetailsComponent implements OnInit {
 
   jobToDisplay: Job | undefined;
-  // imagePath: string | undefined;
   categories: CategoryDTO[] | undefined;
+
 
   detailsJobForm = this.formBuilder.group({
     title: [],
@@ -34,6 +37,7 @@ export class JobDetailsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
+    private userService: UserService,
     private jobService: JobService,
     @Inject(MAT_DIALOG_DATA) public data: { jobId: number }) {}
 
@@ -48,17 +52,6 @@ export class JobDetailsComponent implements OnInit {
       }
     )
   }
-
-  // private getJobImageName(jobId: any) {
-  //   this.jobService.getImageNameForJob(jobId).subscribe(
-  //     (response: string) => {
-  //       this.imagePath = response;
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
 
   public setInitialValues(job: Job) {
     let salary: any;
@@ -115,7 +108,6 @@ export class JobDetailsComponent implements OnInit {
     this.detailsJobForm.controls['createdAt'].disable();
 
     this.getJobToDisplay(this.data.jobId);
-    // this.getJobImageName(31);
     this.getCategories();
   }
 

@@ -33,7 +33,9 @@ export class RecruiterGuard implements CanActivate {
       title: 'permission denied',
       showConfirmButton: false,
       timer: 2200
-    }).then(function(){})
+    }).then(function(){
+      location.reload();
+    })
   }
 }
 

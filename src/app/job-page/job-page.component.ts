@@ -8,6 +8,8 @@ import {AddJobComponent} from "../add-job/add-job.component";
 import {ApplicationPageComponent} from "../application-page/application-page.component";
 import {UserService} from "../services/user/user.service";
 import Swal from "sweetalert2";
+import {UserDTO} from "../entities/userDTO";
+import {Application} from "../entities/application";
 
 @Component({
   selector: 'app-job-page',
@@ -19,7 +21,9 @@ export class JobPageComponent implements OnInit {
   job: Job | undefined;
   flag: boolean = true;
   userRole: string | undefined;
-
+  loggedInUser: UserDTO | undefined;
+  loggedInUserId: number | undefined;
+  employeeApplications: Application[] | undefined;
   jobImage: string | undefined;
 
   constructor(
@@ -62,15 +66,31 @@ export class JobPageComponent implements OnInit {
     )
   }
 
-  public getCurrentUserRole(): void {
-    this.userService.getLoggedInUserRole().subscribe(
-      (response: string) => {
-        this.userRole = response;
+  private  getLoggedInUser() {
+    this.userService.getLoggedInUser().subscribe(
+      (response: UserDTO) => {
+        this.loggedInUser = response;
+        this.userRole = response.role;
+        this.loggedInUserId = response.id;
+        this.getEmployeeApplications(response.id);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )
+  }
+
+  getEmployeeApplications(employeeId: number): void{
+    if (this.loggedInUser?.role === 'EMPLOYEE') {
+      this.userService.getEmployeeApplications(employeeId).subscribe(
+        (response: Application[]) => {
+          this.employeeApplications = response;
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error.message);
+        }
+      )
+    }
   }
 
   switchBetweenDescriptionReviews(option: string){
@@ -79,6 +99,14 @@ export class JobPageComponent implements OnInit {
 
   public applyToJob(jobId: number | undefined){
     if (this.userRole === 'EMPLOYEE') {
+      if (this.employeeApplications !== undefined) {
+          for (let i = 0; i < this.employeeApplications?.length; i++){
+            if (jobId === this.employeeApplications[i].job.id){
+              this.showErrorMessage("You already applied to this job");
+              return;
+            }
+          }
+      }
       if (jobId != undefined) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
@@ -86,25 +114,25 @@ export class JobPageComponent implements OnInit {
         dialogConfig.height = "85%";
         dialogConfig.data = {jobId: jobId};
         this.dialog.open(ApplicationPageComponent, dialogConfig);
+        // this.getEmployeeApplications(this.loggedInUserId!);
       }
     }
   }
 
-  // public showWrongUserRoleMessage(): void{
-  //   Swal.fire({
-  //     position: 'center',
-  //     icon: 'error',
-  //     title: 'Recruiters cannot apply to jobs',
-  //     showConfirmButton: false,
-  //     timer: 2500
-  //   }).then(function(){
-  //     // window.location.reload();
-  //   })
-  // }
-
+  public showErrorMessage(message: string): void{
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 2500
+    }).then(function(){
+      // window.location.reload();
+    })
+  }
 
   ngOnInit(): void {
-    this.getCurrentUserRole();
+    this.getLoggedInUser();
   }
 
 }

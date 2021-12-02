@@ -6,6 +6,7 @@ import { AuthenticationResponse } from 'src/app/entities/AuthenticationResponse'
 import { User } from 'src/app/entities/user';
 import {Job} from "../../entities/job";
 import {UserDTO} from "../../entities/userDTO";
+import {Application} from "../../entities/application";
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,10 @@ export class UserService {
 
   public checkIfLoggedInUserIsEmployee(): Observable<boolean>{
     return this.http.get<boolean>(`${this.apiUrl}/user/role/employee`);
+  }
+
+  public getEmployeeApplications(employeeId: number): Observable<Application[]>{
+    return this.http.get<Application[]>(`${this.apiUrl}/user/employee/${employeeId}/applications`);
   }
 
 }

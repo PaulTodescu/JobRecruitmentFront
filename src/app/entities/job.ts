@@ -23,5 +23,4 @@ export class Job{
             this.location = location;
             this.categoryId = categoryId;
         }
-
 }

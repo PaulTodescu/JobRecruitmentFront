@@ -8,6 +8,8 @@ import {UserDTO} from "../entities/userDTO";
 import {UserService} from "../services/user/user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {ApplicationService} from "../services/application/application.service";
+import {Application} from "../entities/application";
 
 @Component({
   selector: 'app-application-page',
@@ -33,6 +35,7 @@ export class ApplicationPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private jobService: JobService,
     private userService: UserService,
+    private applicationService: ApplicationService,
     private injector: Injector,
     @Inject(MAT_DIALOG_DATA) public data: { jobId: number }) { }
 
@@ -71,9 +74,14 @@ export class ApplicationPageComponent implements OnInit {
 
   sendApplication() {
     if (this.loggedInUser?.role === 'EMPLOYEE') {
+      this.applicationService.sendApplication(this.loggedInUser.id, this.data.jobId, this.applicationCV).subscribe(
+        (response: void) => {
+        },
+        (error: HttpErrorResponse) => {
+          this.onFail("Something went wrong");
+        }
+      )
       this.onSuccess();
-    } else {
-      this.onFail("")
     }
   }
 
