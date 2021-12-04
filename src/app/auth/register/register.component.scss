@@ -18,3 +18,10 @@
   color: black !important;
 }
 
+button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #a3acad !important;
+  color: white;
+}
+
+

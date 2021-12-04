@@ -1,1 +1,38 @@
-<p>employee-applications works!</p>
+<app-navbar></app-navbar>
+<div class="title-section">
+  <h1>Your Applications</h1>
+  <div *ngIf="nr_applications === 1; then singleApplication else multipleApplication"></div>
+  <ng-template #singleApplication><p>showing {{nr_applications}} result</p></ng-template>
+  <ng-template #multipleApplication><p>showing {{nr_applications}} results</p></ng-template>
+</div>
+<div class="applications-container">
+  <div class="application-row" style="color: white !important; background-color: #034953">
+    <div style="width: 80%;">
+      <h3>Job</h3>
+      <h3>Applied On</h3>
+      <h3>Location</h3>
+    </div>
+
+  </div>
+  <div *ngIf="nr_applications !== 0; then showApplications else showNoApplicationsMessage"></div>
+  <ng-template #showApplications>
+    <div *ngFor="let application of applications" class="application-row">
+      <div style="width: 80%;">
+        <h3><u><a (click)="goToJobPage(application.job.id)">{{application?.job?.title}}</a></u></h3>
+        <h3>{{application?.createdAt}}</h3>
+        <h3>{{application?.job?.location}}</h3>
+      </div>
+      <div style="width: 20%;">
+        <button type="button" class="btn btn-secondary" (click)="openJobDetailsModal(application.job.id)">
+          Details
+          <mat-icon style="vertical-align: bottom !important;">visibility</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #showNoApplicationsMessage>
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading" style="margin: 15px auto">NO APPLICATIONS FOUND!</h4>
+    </div>
+  </ng-template>
+</div>

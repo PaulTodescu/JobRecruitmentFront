@@ -1,16 +1,14 @@
 import {Job} from "./job";
 import {User} from "./user";
 
-export class Application{
+export class ApplicationDTO{
   id: number;
   createdAt: string;
   job: Job;
-  employee: User;
 
-  constructor(id: number, createdAt: string, job: Job, employee: User){
+  constructor(id: number, createdAt: string, job: Job){
     this.id = id;
     this.createdAt = createdAt;
     this.job = job;
-    this.employee = employee;
   }
 }

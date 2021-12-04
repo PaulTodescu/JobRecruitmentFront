@@ -74,9 +74,13 @@ h3 {
   margin: 0 3px;
 }
 
-.description {
+.description, .forum {
   text-align: left !important;
   margin-left: 10px;
+}
+
+.confirm-comment {
+  background-color: #034953 !important;
 }
 
 

@@ -9,7 +9,8 @@ import {ApplicationPageComponent} from "../application-page/application-page.com
 import {UserService} from "../services/user/user.service";
 import Swal from "sweetalert2";
 import {UserDTO} from "../entities/userDTO";
-import {Application} from "../entities/application";
+import {ApplicationDTO} from "../entities/applicationDTO";
+import {AddCommentComponent} from "../add-comment/add-comment.component";
 
 @Component({
   selector: 'app-job-page',
@@ -19,11 +20,10 @@ import {Application} from "../entities/application";
 export class JobPageComponent implements OnInit {
 
   job: Job | undefined;
-  flag: boolean = true;
+  flag: boolean = false;
   userRole: string | undefined;
   loggedInUser: UserDTO | undefined;
-  loggedInUserId: number | undefined;
-  employeeApplications: Application[] | undefined;
+  employeeApplications: ApplicationDTO[] | undefined;
   jobImage: string | undefined;
 
   constructor(
@@ -71,8 +71,7 @@ export class JobPageComponent implements OnInit {
       (response: UserDTO) => {
         this.loggedInUser = response;
         this.userRole = response.role;
-        this.loggedInUserId = response.id;
-        this.getEmployeeApplications(response.id);
+        this.getEmployeeApplications();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -80,10 +79,10 @@ export class JobPageComponent implements OnInit {
     )
   }
 
-  getEmployeeApplications(employeeId: number): void{
+  getEmployeeApplications(): void{
     if (this.loggedInUser?.role === 'EMPLOYEE') {
-      this.userService.getEmployeeApplications(employeeId).subscribe(
-        (response: Application[]) => {
+      this.userService.getEmployeeApplications().subscribe(
+        (response: ApplicationDTO[]) => {
           this.employeeApplications = response;
         },
         (error: HttpErrorResponse) => {
@@ -114,7 +113,6 @@ export class JobPageComponent implements OnInit {
         dialogConfig.height = "85%";
         dialogConfig.data = {jobId: jobId};
         this.dialog.open(ApplicationPageComponent, dialogConfig);
-        // this.getEmployeeApplications(this.loggedInUserId!);
       }
     }
   }
@@ -129,6 +127,32 @@ export class JobPageComponent implements OnInit {
     }).then(function(){
       // window.location.reload();
     })
+  }
+
+  // addComment(jobId: number | undefined): void {
+  //   if (jobId != undefined){
+  //     Swal.fire({
+  //       title: 'Enter comment',
+  //       input: 'textarea',
+  //       width: '45%',
+  //       customClass: {
+  //         input: 'confirm-comment'
+  //       }
+  //     }).then(function(result) {
+  //       if (result.value) {
+  //
+  //       }
+  //     })
+  //   }
+  // }
+
+  public addComment(jobId: number | undefined): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height = "40%";
+    dialogConfig.data = {jobId: jobId};
+    this.dialog.open(AddCommentComponent, dialogConfig);
   }
 
   ngOnInit(): void {

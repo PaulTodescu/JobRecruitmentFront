@@ -9,7 +9,6 @@ import {CategoryDTO} from "../entities/categoryDTO";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {UserDTO} from "../entities/userDTO";
 import {UserService} from "../services/user/user.service";
-import {Application} from "../entities/application";
 
 @Component({
   selector: 'app-job-details',

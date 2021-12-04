@@ -72,13 +72,21 @@ input.example-right-align::-webkit-inner-spin-button {
   display: none;
 }
 
-.material-icons.color_white {color: #ffffff;}
+.material-icons.color_white {color: #ffffff !important;}
 .close-button{
   float: right;
   margin-top: 2px;
   margin-right: 2px;
-  background-color: white;
+  background-color: white !important;
   color: black;
 }
+
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #a3acad !important;
+  color: white !important;
+}
+
+
 
 

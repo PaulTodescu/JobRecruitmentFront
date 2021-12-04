@@ -11,6 +11,7 @@ import {BaseGuard} from "./guards/base.guard";
 import {AuthGuard} from "./guards/auth.guard";
 import {RecruiterGuard} from "./guards/recruiter-guard.guard";
 import {EmployeeGuard} from "./guards/employee.guard";
+import {EmployeeApplicationsComponent} from "./employee-applications/employee-applications.component";
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: 'job/details',
     component: JobPageComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'myapplications',
+    component: EmployeeApplicationsComponent,
+    canActivate: [EmployeeGuard]
   }
 ];
 

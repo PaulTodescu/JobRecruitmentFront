@@ -10,7 +10,7 @@
         <a class="nav-link active" mat-button (click)="goToMyJobs()">Your Jobs</a>
     </li>
     <li class="nav-item" *ngIf="userRole === 'EMPLOYEE'">
-        <a class="nav-link active" mat-button>Your Applications</a>
+        <a class="nav-link active" mat-button (click)="goToMyApplications()">Your Applications</a>
     </li>
     <nav class="nav-right">
         <ul>

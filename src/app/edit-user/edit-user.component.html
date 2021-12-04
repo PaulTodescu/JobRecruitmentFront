@@ -12,6 +12,7 @@
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>First Name</mat-label>
                             <input formControlName="firstName" matInput type="text"/>
+                            <mat-error *ngIf="editUserForm.get('firstName')?.invalid">{{getFormFirstNameErrorMessage()}}</mat-error>
                         </mat-form-field>
                     </div>
 
@@ -20,6 +21,7 @@
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Last Name</mat-label>
                             <input formControlName="lastName" matInput type="text"/>
+                            <mat-error *ngIf="editUserForm.get('lastName')?.invalid">{{getFormLastNameErrorMessage()}}</mat-error>
                         </mat-form-field>
                     </div>
 
@@ -36,6 +38,7 @@
                       <mat-form-field class="full-width" appearance="outline" (input)="checkIfPhoneNumberIsPresent()" >
                         <mat-label>Phone</mat-label>
                         <input formControlName="phoneNumber" matInput type="text"/>
+                        <mat-error *ngIf="editUserForm.get('phoneNumber')?.invalid">{{getFormPhoneNumberErrorMessage()}}</mat-error>
                       </mat-form-field>
                     </div>
 

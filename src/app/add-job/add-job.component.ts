@@ -1,6 +1,6 @@
 import {HttpClient, HttpErrorResponse, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Component, Injector, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {CategoryDTO} from '../entities/categoryDTO';
@@ -28,15 +28,15 @@ export class AddJobComponent implements OnInit {
     private injector: Injector) {}
 
   addJobForm: FormGroup = this.formBuilder.group({
-    title:[''],
-    description:[''],
-    salary:[undefined],
+    title:['', [Validators.required, Validators.minLength(5), Validators.pattern(/^(?:[a-zA-Z0-9\s]+)?$/)]],
+    description:['', [Validators.required, Validators.minLength(20)]],
+    salary:[undefined, [Validators.pattern("^[0-9]*$")]],
     salaryCurrency:[undefined],
     salaryType:[undefined],
     createdAt:[],
-    companyName:[''],
-    location:[''],
-    category:['']
+    companyName:['', [Validators.required, Validators.minLength(5), Validators.pattern(/^(?:[a-zA-Z0-9\s]+)?$/)]],
+    location:['', [Validators.required, Validators.minLength(5)]],
+    category:['', [Validators.required]]
   })
 
   public getCategories(): void{
@@ -143,6 +143,69 @@ export class AddJobComponent implements OnInit {
       this.imagePath = fileList[0].name;
       this.jobImage = fileList[0];
     }
+  }
+
+  getFormTitleErrorMessage() {
+    if (this.addJobForm.get('title')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.addJobForm.get('title')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    else if (this.addJobForm.get('title')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormDescriptionErrorMessage() {
+    if (this.addJobForm.get('description')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.addJobForm.get('description')?.hasError('minlength')){
+      return 'enter at least 20 characters';
+    }
+    else if (this.addJobForm.get('description')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormSalaryErrorMessage() {
+    if (this.addJobForm.get('salary')?.invalid){
+      return 'only digits are allowed';
+    }
+    return;
+  }
+
+  getFormCompanyNameErrorMessage() {
+    if (this.addJobForm.get('companyName')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.addJobForm.get('companyName')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    else if (this.addJobForm.get('companyName')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormLocationErrorMessage() {
+    if (this.addJobForm.get('location')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.addJobForm.get('location')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    return;
+  }
+
+  getFormCategoryErrorMessage() {
+    if (this.addJobForm.get('category')?.hasError('required')){
+      return 'you must select a value';
+    }
+    return;
   }
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "../services/user/user.service";
 import {UserDTO} from "../entities/userDTO";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -17,10 +17,10 @@ export class EditUserComponent implements OnInit {
   isPhoneNumberEmpty: boolean = false;
 
   editUserForm = this.formBuilder.group({
-    firstName: [],
-    lastName:[],
+    firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^(?:[a-zA-Z\s]+)?$/)]],
+    lastName:['', [Validators.required, Validators.minLength(3), Validators.pattern(/^(?:[a-zA-Z\s]+)?$/)]],
     email:[],
-    phoneNumber:[],
+    phoneNumber:['', [Validators.minLength(5), Validators.pattern("^[0-9]*$")]],
     contactMethod:[],
     role:[],
   })
@@ -95,6 +95,42 @@ export class EditUserComponent implements OnInit {
     })
 
     this.checkIfPhoneNumberIsPresent();
+  }
+
+  getFormFirstNameErrorMessage() {
+    if (this.editUserForm.get('firstName')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editUserForm.get('firstName')?.hasError('minlength')){
+      return 'enter at least 3 characters';
+    }
+    else if (this.editUserForm.get('firstName')?.invalid){
+      return 'only alphabetical characters are allowed';
+    }
+    return;
+  }
+
+  getFormLastNameErrorMessage() {
+    if (this.editUserForm.get('lastName')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editUserForm.get('lastName')?.hasError('minlength')){
+      return 'enter at least 3 characters';
+    }
+    else if (this.editUserForm.get('lastName')?.invalid){
+      return 'only alphabetical characters are allowed';
+    }
+    return;
+  }
+
+  getFormPhoneNumberErrorMessage() {
+    if (this.editUserForm.get('phoneNumber')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    else if (this.editUserForm.get('phoneNumber')?.invalid){
+      return 'only digits are allowed';
+    }
+    return;
   }
 
   ngOnInit(): void {

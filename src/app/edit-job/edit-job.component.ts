@@ -1,5 +1,5 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoryDTO} from "../entities/categoryDTO";
 import {CategoryService} from "../services/category/category.service";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -23,14 +23,15 @@ export class EditJobComponent implements OnInit {
   jobImage: File | undefined;
 
   editJobForm = this.formBuilder.group({
-    title: [],
-    description: [],
-    salary: [],
-    salaryCurrency: [],
-    salaryType: [],
-    companyName: [],
-    location: [],
-    categoryId: []
+    title:['', [Validators.required, Validators.minLength(5), Validators.pattern(/^(?:[a-zA-Z0-9\s]+)?$/)]],
+    description:['', [Validators.required, Validators.minLength(20)]],
+    salary:[undefined, [Validators.pattern("^[0-9]*$")]],
+    salaryCurrency:[undefined],
+    salaryType:[undefined],
+    createdAt:[],
+    companyName:['', [Validators.required, Validators.minLength(5), Validators.pattern(/^(?:[a-zA-Z0-9\s]+)?$/)]],
+    location:['', [Validators.required, Validators.minLength(5)]],
+    categoryId:['', [Validators.required]]
   });
 
   constructor(
@@ -56,7 +57,8 @@ export class EditJobComponent implements OnInit {
   public onEditJob(editJobForm: FormGroup): void{
 
     if (this.jobToEdit?.title !== undefined && this.jobToEdit?.description !== undefined
-      && this.jobToEdit?.companyName !== undefined && this.jobToEdit.location !== undefined){
+      && this.jobToEdit?.companyName !== undefined && this.jobToEdit.location !== undefined
+      && this.editJobForm){
       this.jobService.editJob(editJobForm.value, this.jobToEdit.id).subscribe(
         () => {
           this.onSuccess();
@@ -157,6 +159,62 @@ export class EditJobComponent implements OnInit {
       this.imagePath = fileList[0].name;
       this.jobImage = fileList[0];
     }
+  }
+
+  getFormTitleErrorMessage() {
+    if (this.editJobForm.get('title')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editJobForm.get('title')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    else if (this.editJobForm.get('title')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormDescriptionErrorMessage() {
+    if (this.editJobForm.get('description')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editJobForm.get('description')?.hasError('minlength')){
+      return 'enter at least 20 characters';
+    }
+    else if (this.editJobForm.get('description')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormSalaryErrorMessage() {
+    if (this.editJobForm.get('salary')?.invalid){
+      return 'only digits are allowed';
+    }
+    return;
+  }
+
+  getFormCompanyNameErrorMessage() {
+    if (this.editJobForm.get('companyName')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editJobForm.get('companyName')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    else if (this.editJobForm.get('companyName')?.invalid){
+      return 'only alphabetical characters and digits are allowed';
+    }
+    return;
+  }
+
+  getFormLocationErrorMessage() {
+    if (this.editJobForm.get('location')?.hasError('required')){
+      return 'you must enter a value';
+    }
+    else if (this.editJobForm.get('location')?.hasError('minlength')){
+      return 'enter at least 5 characters';
+    }
+    return;
   }
 
   ngOnInit(): void {

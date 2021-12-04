@@ -59,3 +59,20 @@ h3{
   background-color: #f2f2f2 !important;
   border: none !important;
 }
+
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: #034953;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -46,7 +46,7 @@ export class RecruiterJobsComponent implements OnInit {
     this.dialog.open(AddJobComponent, dialogConfig);
   }
 
-  goToEditJob(jobId: number): void{
+  public goToEditJob(jobId: number): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
@@ -55,7 +55,7 @@ export class RecruiterJobsComponent implements OnInit {
     this.dialog.open(EditJobComponent, dialogConfig);
   }
 
-  openJobDetailsModal(jobId: number): void{
+  public openJobDetailsModal(jobId: number): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "40%";
     dialogConfig.height = "90%";
@@ -63,13 +63,19 @@ export class RecruiterJobsComponent implements OnInit {
     this.dialog.open(JobDetailsComponent, dialogConfig);
   }
 
-  deleteJob(jobId: number): void {
+  public deleteJob(jobId: number, jobTitle: string): void {
     this.jobService.deleteJob(jobId).subscribe(
       () => {
+        Swal.fire(
+          'Job Deleted!',
+          jobTitle + ' has been removed',
+          'success'
+        )
         this.getJobsForCurrentUser();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
+        this.onFail("Something went wrong. Try again later.")
       }
     )
   }
@@ -85,14 +91,27 @@ export class RecruiterJobsComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.deleteJob(jobId);
-        Swal.fire(
-          'Job Deleted!',
-          jobTitle + ' has been removed',
-          'success'
-        )
+        this.deleteJob(jobId, jobTitle);
       }
     })
+  }
+
+  public onFail(message: string): void{
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 2500
+    }).then(function(){
+      // window.location.reload();
+    })
+  }
+
+  goToJobPage(jobId: number): void {
+    this.router.navigate(['/job/details'], {
+      queryParams: {'jobId': jobId}
+    });
   }
 
   ngOnInit(): void {

@@ -39,6 +39,7 @@ import {ButtonModule} from 'primeng/button';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplicationPageComponent } from './application-page/application-page.component';
 import { EmployeeApplicationsComponent } from './employee-applications/employee-applications.component';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { EmployeeApplicationsComponent } from './employee-applications/employee-
     JobDetailsComponent,
     ApplicationPageComponent,
     EmployeeApplicationsComponent,
+    AddCommentComponent,
   ],
   imports: [
     BrowserModule,

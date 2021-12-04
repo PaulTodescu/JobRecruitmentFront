@@ -11,7 +11,7 @@
     <div style="width: 70%;">
       <h3>Title</h3>
       <h3>Offered By</h3>
-      <h3>Date</h3>
+      <h3>Added On</h3>
     </div>
     <div style="width: 30%;">
       <h3>Actions</h3>
@@ -21,7 +21,7 @@
   <ng-template #showJobs>
     <div *ngFor="let job of jobs" class="job-row">
       <div style="width: 70%;">
-        <h3>{{job?.title}}</h3>
+        <h3><u><a (click)="goToJobPage(job.id)">{{job?.title}}</a></u></h3>
         <h3>{{job?.companyName}}</h3>
         <h3>{{job?.createdAt}}</h3>
       </div>

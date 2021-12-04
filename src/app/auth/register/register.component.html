@@ -3,32 +3,36 @@
     <!--First Name-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>First Name <span style="color: red;">*</span></mat-label>
+            <mat-label>First Name</mat-label>
             <input formControlName="firstName" matInput type="text" />
+            <mat-error *ngIf="registerForm.get('firstName')?.invalid">{{getFormFirstNameErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
 
     <!--Last Name-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Last Name <span style="color: red;">*</span></mat-label>
+            <mat-label>Last Name</mat-label>
             <input formControlName="lastName" matInput type="text" />
+            <mat-error *ngIf="registerForm.get('lastName')?.invalid">{{getFormLastNameErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
 
     <!--Email-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email <span style="color: red;">*</span></mat-label>
+            <mat-label>Email</mat-label>
             <input formControlName="email" matInput type="text" />
+            <mat-error *ngIf="registerForm.get('email')?.invalid">{{getFormEmailErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
 
     <!--Password-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Password <span style="color: red;">*</span></mat-label>
+            <mat-label>Password</mat-label>
             <input formControlName="password" matInput [type]=" hidePassword ? 'password' : 'text'" />
+            <mat-error *ngIf="registerForm.get('password')?.invalid">{{getFormPasswordErrorMessage()}}</mat-error>
             <button  mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hidePassword">
             <mat-icon>
                 {{hidePassword ? 'visibility_off' : 'visibility'}}
@@ -40,23 +44,25 @@
     <!--Confirm Password-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Confirm Password <span style="color: red;">*</span></mat-label>
-            <input formControlName="password" matInput type='password' />
+            <mat-label>Confirm Password</mat-label>
+            <input formControlName="confirmPassword" matInput type='password' />
+            <mat-error *ngIf="registerForm.get('confirmPassword')?.invalid">{{getFormConfirmPasswordErrorMessage()}}</mat-error>
     </mat-form-field>
     </div>
 
     <!--Role-->
     <div>
         <mat-form-field class="full-width" appearance="outline">
-          <mat-label>What do you want? <span style="color: red;">*</span></mat-label>
+          <mat-label>What do you want?</mat-label>
             <mat-select  formControlName="role">
                 <mat-option value="EMPLOYEE">I am looking for jobs</mat-option>
                 <mat-option value="RECRUITER">I want to hire people</mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.get('role')?.invalid">{{getFormRoleErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
     <div class="center-button">
-        <button mat-raised-button class="submitButton" (click)="register(registerForm)">Register</button>
+        <button mat-raised-button class="submitButton" [disabled]="!registerForm.valid" (click)="register(registerForm)">Register</button>
     </div>
   </form>
