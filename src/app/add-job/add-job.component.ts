@@ -1,6 +1,6 @@
-import {HttpClient, HttpErrorResponse, HttpEventType, HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Component, Injector, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {CategoryDTO} from '../entities/categoryDTO';
@@ -119,7 +119,6 @@ export class AddJobComponent implements OnInit {
   }
 
   public onSuccess(): void {
-    let router: Router = this.injector.get(Router);
     let dialogRef: MatDialogRef<AddJobComponent> = this.injector.get(MatDialogRef);
     Swal.fire({
       position: 'center',
@@ -129,8 +128,6 @@ export class AddJobComponent implements OnInit {
       timer: 2000
     }).then(function(){
       dialogRef.close();
-      location.reload()
-      // router.navigateByUrl("home");
     })
   }
 

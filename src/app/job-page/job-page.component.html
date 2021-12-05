@@ -41,16 +41,24 @@
           </div>
           <div *ngIf="!flag" class="forum">
             <button class="applyButton" mat-raised-button (click)="addComment(job?.id)">Add a comment</button>
-            <div class="footer" style="margin: 15px 0; background-color: #f7f7f7">
-              <h3 style="display: inline">Paul Todescu</h3>
-              <p style="display: inline"><span style="color: #919191"> - 04/12/2021 -</span></p>
+            <div *ngIf="nr_comments !== 0; then showComments else showNoCommentsMessage"></div>
+            <ng-template #showComments>
+            <div *ngFor="let comment of jobComments" class="footer" style="margin: 15px 0; background-color: #f7f7f7">
+              <h3 style="display: inline">{{comment?.author}}</h3>
+              <p style="display: inline"><span style="color: #919191">- {{comment?.createdAt}} -</span></p>
               <p style="padding: 10px 30px">
                 <i>
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                  "{{comment?.content}}"
                 </i>
               </p>
             </div>
+            </ng-template>
           </div>
+          <ng-template #showNoCommentsMessage>
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading" style="margin: 15px auto">NO COMMENTS ADDED</h4>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

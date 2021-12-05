@@ -4,7 +4,6 @@ import {CategoryDTO} from "../entities/categoryDTO";
 import {CategoryService} from "../services/category/category.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {JobService} from "../services/job/job.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {Job} from "../entities/job";
 import Swal from "sweetalert2";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -124,7 +123,6 @@ export class EditJobComponent implements OnInit {
   }
 
   public onSuccess(): void {
-    let router: Router = this.injector.get(Router);
     let dialogRef: MatDialogRef<EditJobComponent> = this.injector.get(MatDialogRef);
     Swal.fire({
       position: 'center',
@@ -134,8 +132,6 @@ export class EditJobComponent implements OnInit {
       timer: 2000
     }).then(function(){
       dialogRef.close();
-      location.reload();
-      // router.navigateByUrl("myjobs");
     })
   }
 

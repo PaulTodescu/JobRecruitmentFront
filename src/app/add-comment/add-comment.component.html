@@ -1,7 +1,10 @@
 <div class="card-body" style="overflow: hidden !important;">
   <h2 class="section-title">Enter Comment</h2>
-    <div style="text-align: center">
-      <textarea [rows]="8" pInputTextarea style="width: 100%; border:solid 2px #a3acad; outline-color: #a3acad;"></textarea>
-      <button class="submitButton" mat-raised-button data-dismiss="modal" >Add</button>
+    <div style="overflow: hidden">
+      <textarea [rows]="8" maxlength="600" [(ngModel)]="comment" style="width: 100%; border:solid 2px #a3acad; outline-color: #a3acad;"></textarea>
+      <p style="float: right">{{comment?.length || 0}}/600</p>
     </div>
+  <div style="text-align: center;">
+    <button mat-raised-button class="submitButton" data-dismiss="modal" (click)="addComment()">Add</button>
+  </div>
 </div>

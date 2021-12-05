@@ -44,6 +44,9 @@ export class RecruiterJobsComponent implements OnInit {
     dialogConfig.width = "40%";
     dialogConfig.height = "90%";
     this.dialog.open(AddJobComponent, dialogConfig);
+    this.dialog._getAfterAllClosed().subscribe(() => {
+      this.getJobsForCurrentUser();
+    });
   }
 
   public goToEditJob(jobId: number): void{
@@ -53,6 +56,9 @@ export class RecruiterJobsComponent implements OnInit {
     dialogConfig.height = "90%";
     dialogConfig.data = {jobId: jobId};
     this.dialog.open(EditJobComponent, dialogConfig);
+    this.dialog._getAfterAllClosed().subscribe(() => {
+      this.getJobsForCurrentUser();
+    });
   }
 
   public openJobDetailsModal(jobId: number): void{

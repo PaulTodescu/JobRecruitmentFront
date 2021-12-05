@@ -4,13 +4,14 @@ import {JobService} from "../services/job/job.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {AddJobComponent} from "../add-job/add-job.component";
 import {ApplicationPageComponent} from "../application-page/application-page.component";
 import {UserService} from "../services/user/user.service";
 import Swal from "sweetalert2";
 import {UserDTO} from "../entities/userDTO";
 import {ApplicationDTO} from "../entities/applicationDTO";
 import {AddCommentComponent} from "../add-comment/add-comment.component";
+import {CommentService} from "../services/comment/comment.service";
+import {JobComment} from "../entities/comment";
 
 @Component({
   selector: 'app-job-page',
@@ -20,21 +21,25 @@ import {AddCommentComponent} from "../add-comment/add-comment.component";
 export class JobPageComponent implements OnInit {
 
   job: Job | undefined;
-  flag: boolean = false;
+  flag: boolean =  true;
   userRole: string | undefined;
   loggedInUser: UserDTO | undefined;
   employeeApplications: ApplicationDTO[] | undefined;
   jobImage: string | undefined;
+  jobComments: JobComment[] | undefined;
+  nr_comments: number = 0;
 
   constructor(
     private jobService: JobService,
     private dialog: MatDialog,
     private userService: UserService,
+    private commentService: CommentService,
     private activatedRout: ActivatedRoute) {
       this.activatedRout.queryParams.subscribe(
         data => {
           this.getJob(data.jobId);
           this.getJobImage(data.jobId);
+          this.getCommentsForJob(data.jobId);
         }
       )
   }
@@ -129,30 +134,30 @@ export class JobPageComponent implements OnInit {
     })
   }
 
-  // addComment(jobId: number | undefined): void {
-  //   if (jobId != undefined){
-  //     Swal.fire({
-  //       title: 'Enter comment',
-  //       input: 'textarea',
-  //       width: '45%',
-  //       customClass: {
-  //         input: 'confirm-comment'
-  //       }
-  //     }).then(function(result) {
-  //       if (result.value) {
-  //
-  //       }
-  //     })
-  //   }
-  // }
-
   public addComment(jobId: number | undefined): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
-    dialogConfig.height = "40%";
+    dialogConfig.height = "45%";
     dialogConfig.data = {jobId: jobId};
     this.dialog.open(AddCommentComponent, dialogConfig);
+    this.dialog._getAfterAllClosed().subscribe(() => {
+      if (jobId != undefined) {
+        this.getCommentsForJob(jobId);
+      }
+    });
+  }
+
+  public getCommentsForJob(jobId: number){
+    this.commentService.getCommentsForJob(jobId).subscribe(
+      (response: JobComment[]) => {
+        this.jobComments = response;
+        this.nr_comments = response.length;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
   }
 
   ngOnInit(): void {
