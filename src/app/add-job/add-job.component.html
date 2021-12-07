@@ -19,8 +19,8 @@
     <div>
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea #input maxlength="500" formControlName="description" matInput [rows]="3" pInputTextarea [autoResize]="true"></textarea>
-        <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+        <textarea #input maxlength="1000" formControlName="description" matInput [rows]="3" pInputTextarea [autoResize]="true"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/1000</mat-hint>
         <mat-error *ngIf="addJobForm.get('description')?.invalid">{{getFormDescriptionErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
