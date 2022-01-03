@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
         this.nr_categories = response.length;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

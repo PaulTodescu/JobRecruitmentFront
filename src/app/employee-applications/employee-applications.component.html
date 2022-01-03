@@ -6,6 +6,12 @@
   <ng-template #multipleApplication><p>showing {{nr_applications}} results</p></ng-template>
 </div>
 <div class="applications-container">
+  <div style="display: flex;">
+    <button type="button" class="btn btn-dark" (click)="downloadApplicationsCsv()" style="margin-left: auto;">
+      Export
+      <mat-icon style="vertical-align: bottom !important;">arrow_downward</mat-icon>
+    </button>
+  </div>
   <div class="application-row" style="color: white !important; background-color: #034953">
     <div style="width: 80%;">
       <h3>Job</h3>

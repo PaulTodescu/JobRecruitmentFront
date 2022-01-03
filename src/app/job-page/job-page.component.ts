@@ -55,7 +55,7 @@ export class JobPageComponent implements OnInit {
           '</h3>';
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -66,7 +66,7 @@ export class JobPageComponent implements OnInit {
         this.jobImage = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -79,7 +79,7 @@ export class JobPageComponent implements OnInit {
         this.getEmployeeApplications();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

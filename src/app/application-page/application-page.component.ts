@@ -45,7 +45,7 @@ export class ApplicationPageComponent implements OnInit {
         this.setUserValues(response);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -77,9 +77,9 @@ export class ApplicationPageComponent implements OnInit {
         this.onFail("You must upload your CV");
       } else {
         this.applicationService.sendApplication(this.loggedInUser.id, this.data.jobId, this.applicationCV).subscribe(
-          (response: void) => {
+          () => {
           },
-          (error: HttpErrorResponse) => {
+          () => {
             this.onFail("Something went wrong");
           }
         )

@@ -38,7 +38,7 @@ export class EditUserComponent implements OnInit {
         this.setInitialValues(response);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -51,7 +51,7 @@ export class EditUserComponent implements OnInit {
           this.onSuccess();
       },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
         }
       )
      }

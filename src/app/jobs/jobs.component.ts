@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JobDTO} from '../entities/jobDTO';
 import {JobService} from '../services/job/job.service';
@@ -40,7 +40,7 @@ export class JobsComponent implements OnInit {
         this.nr_jobs = response.jobs.length;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

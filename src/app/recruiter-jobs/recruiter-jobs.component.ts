@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {JobDetailsComponent} from "../job-details/job-details.component";
 import {AddJobComponent} from "../add-job/add-job.component";
 import {EditJobComponent} from "../edit-job/edit-job.component";
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
   selector: 'app-recruiter-jobs',
@@ -33,7 +34,7 @@ export class RecruiterJobsComponent implements OnInit {
         this.nr_jobs = response.length;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -114,10 +115,59 @@ export class RecruiterJobsComponent implements OnInit {
     })
   }
 
-  goToJobPage(jobId: number): void {
+  public goToJobPage(jobId: number): void {
     this.router.navigate(['/job/details'], {
       queryParams: {'jobId': jobId}
     });
+  }
+
+  public downloadJobsCsv(): void {
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      title: '',
+      useBom: true,
+      noDownload: false,
+      headers: ["Added on", "Title", "Offered By", "Location", "Salary", "Currency", "Type", "Description"]
+    };
+
+    if (this.jobs !== undefined) {
+      let csvData = [];
+      for (let i = 0; i < this.jobs.length; i++) {
+        if (this.jobs[i].salary === null){
+          this.jobs[i].salary = 0;
+        }
+        if (this.jobs[i].salaryCurrency === null){
+          this.jobs[i].salaryCurrency = 'none';
+        }
+        if (this.jobs[i].salaryType === null){
+          this.jobs[i].salaryType = 'none';
+        }
+        let entry = {
+          "createdAt": this.jobs[i].createdAt,
+          "title": this.jobs[i].title,
+          "companyName": this.jobs[i].companyName,
+          "location": this.jobs[i].location,
+          "salary": this.jobs[i].salary,
+          "salaryCurrency": this.jobs[i].salaryCurrency,
+          "salaryType": this.jobs[i].salaryType,
+          "description": this.jobs[i].description
+        };
+        csvData.push(entry);
+      }
+      let today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      const yyyy = today.getFullYear();
+
+      let title = 'Jobs-' + dd + '-' + mm + '-' + yyyy;
+
+      new ngxCsv(csvData, title, options);
+
+    }
   }
 
   ngOnInit(): void {

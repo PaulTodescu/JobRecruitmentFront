@@ -1,13 +1,11 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {CategoryService} from "../services/category/category.service";
 import {JobService} from "../services/job/job.service";
-import {ActivatedRoute} from "@angular/router";
 import {Job} from "../entities/job";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CategoryDTO} from "../entities/categoryDTO";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {UserDTO} from "../entities/userDTO";
 import {UserService} from "../services/user/user.service";
 
 @Component({
@@ -47,7 +45,7 @@ export class JobDetailsComponent implements OnInit {
         this.setInitialValues(response);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -90,7 +88,7 @@ export class JobDetailsComponent implements OnInit {
         this.categories = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

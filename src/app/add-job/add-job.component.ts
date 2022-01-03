@@ -45,7 +45,7 @@ export class AddJobComponent implements OnInit {
         this.categories = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -81,7 +81,7 @@ export class AddJobComponent implements OnInit {
             this.onSuccess();
           },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
           }
         )
         this.jobService.assignImageToJob(jobIdResponse, this.jobImage).subscribe(
@@ -89,12 +89,12 @@ export class AddJobComponent implements OnInit {
             console.log(this.jobImage);
           },
           (error: HttpErrorResponse) => {
-            alert(error.message)
+            console.log(error.message)
           }
         )
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

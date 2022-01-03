@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
         this.username = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
         this.userRole = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

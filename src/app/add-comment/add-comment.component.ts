@@ -31,7 +31,7 @@ export class AddCommentComponent implements OnInit {
           this.onSuccess();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
         }
       )
     }
