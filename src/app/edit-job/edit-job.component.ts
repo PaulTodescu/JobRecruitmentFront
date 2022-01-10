@@ -19,6 +19,7 @@ export class EditJobComponent implements OnInit {
   categories: CategoryDTO[] | undefined;
   jobToEdit: Job | undefined;
   imagePath: string | undefined;
+  originalImagePath: string | undefined;
   jobImage: File | undefined;
 
   editJobForm = this.formBuilder.group({
@@ -66,14 +67,16 @@ export class EditJobComponent implements OnInit {
           console.log(error.message);
         }
       )
-      this.jobService.assignImageToJob(this.jobToEdit.id, this.jobImage).subscribe(
-        () => {
-          console.log(this.jobImage);
-        },
-        (error: HttpErrorResponse) => {
-          console.log(error.message)
-        }
-      )
+      if (this.imagePath !== this.originalImagePath) {
+        this.jobService.assignImageToJob(this.jobToEdit.id, this.jobImage).subscribe(
+          () => {
+            console.log(this.jobImage);
+          },
+          (error: HttpErrorResponse) => {
+            console.log(error.message)
+          }
+        )
+      }
     }
   }
 
@@ -139,6 +142,7 @@ export class EditJobComponent implements OnInit {
     this.jobService.getImageNameForJob(jobId).subscribe(
       (response: string) => {
         this.imagePath = response;
+        this.originalImagePath = response;
       },
       (error: HttpErrorResponse) => {
         console.log(error);
